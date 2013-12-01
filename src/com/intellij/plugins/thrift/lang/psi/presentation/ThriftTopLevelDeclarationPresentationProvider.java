@@ -1,12 +1,13 @@
 package com.intellij.plugins.thrift.lang.psi.presentation;
 
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.Nullable;
+import com.intellij.ide.IconDescriptorUpdaters;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.ItemPresentationProvider;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
 
 /**
  * Created by fkorotkov.
@@ -30,7 +31,7 @@ public class ThriftTopLevelDeclarationPresentationProvider implements ItemPresen
       @Nullable
       @Override
       public Icon getIcon(boolean unused) {
-        return item.getIcon(Iconable.ICON_FLAG_VISIBILITY);
+        return IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY);
       }
     };
   }

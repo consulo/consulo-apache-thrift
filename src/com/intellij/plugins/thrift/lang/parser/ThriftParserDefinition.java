@@ -15,7 +15,9 @@
  */
 package com.intellij.plugins.thrift.lang.parser;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
@@ -29,15 +31,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
 
 public class ThriftParserDefinition implements ParserDefinition {
   @NotNull
-  public Lexer createLexer(Project project) {
+  public Lexer createLexer(Project project, LanguageVersion languageVersion) {
     return new ThriftLexer();
   }
 
-  public PsiParser createParser(Project project) {
+  public PsiParser createParser(Project project, LanguageVersion languageVersion) {
     return new ThriftParser();
   }
 
@@ -46,17 +47,17 @@ public class ThriftParserDefinition implements ParserDefinition {
   }
 
   @NotNull
-  public TokenSet getWhitespaceTokens() {
+  public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
     return ThriftTokenTypeSets.WHITESPACES;
   }
 
   @NotNull
-  public TokenSet getCommentTokens() {
+  public TokenSet getCommentTokens(LanguageVersion languageVersion) {
     return ThriftTokenTypeSets.COMMENTS;
   }
 
   @NotNull
-  public TokenSet getStringLiteralElements() {
+  public TokenSet getStringLiteralElements(LanguageVersion languageVersion) {
     return ThriftTokenTypeSets.STRINGS;
   }
 

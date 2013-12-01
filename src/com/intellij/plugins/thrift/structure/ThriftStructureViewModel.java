@@ -15,20 +15,23 @@
  */
 package com.intellij.plugins.thrift.structure;
 
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewModelBase;
 import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.structureView.impl.java.VisibilitySorter;
-import com.intellij.ide.util.treeView.smartTree.*;
+import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
+import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
+import com.intellij.ide.util.treeView.smartTree.Filter;
+import com.intellij.ide.util.treeView.smartTree.Sorter;
+import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftSubDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.PlatformIcons;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author: Fedor.Korotkov
@@ -36,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 public class ThriftStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
   public ThriftStructureViewModel(@NotNull PsiFile psiFile) {
     super(psiFile, new ThriftStructureViewElement(psiFile));
-    withSorters(Sorter.ALPHA_SORTER, VisibilitySorter.INSTANCE);
+    withSorters(Sorter.ALPHA_SORTER);
     withSuitableClasses(ThriftDeclaration.class);
   }
 

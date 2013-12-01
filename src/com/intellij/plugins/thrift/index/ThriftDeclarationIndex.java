@@ -1,5 +1,13 @@
 package com.intellij.plugins.thrift.index;
 
+import gnu.trove.THashMap;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.plugins.thrift.ThriftFileType;
@@ -10,16 +18,13 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
-import com.intellij.util.indexing.*;
+import com.intellij.util.indexing.DataIndexer;
+import com.intellij.util.indexing.FileBasedIndex;
+import com.intellij.util.indexing.FileContent;
+import com.intellij.util.indexing.ID;
+import com.intellij.util.indexing.ScalarIndexExtension;
 import com.intellij.util.io.EnumeratorStringDescriptor;
 import com.intellij.util.io.KeyDescriptor;
-import gnu.trove.THashMap;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by fkorotkov.
@@ -29,7 +34,7 @@ public class ThriftDeclarationIndex extends ScalarIndexExtension<String> {
   private final EnumeratorStringDescriptor myKeyDescriptor = new EnumeratorStringDescriptor();
   private final FileBasedIndex.InputFilter myFilter = new FileBasedIndex.InputFilter() {
     @Override
-    public boolean acceptInput(VirtualFile file) {
+    public boolean acceptInput(Project project, VirtualFile file) {
       return file.getFileType() == ThriftFileType.INSTANCE;
     }
   };
