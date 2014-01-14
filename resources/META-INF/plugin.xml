@@ -2,40 +2,7 @@
   <id>com.intellij.plugins.thrift</id>
   <name>Apache Thrift</name>
   <description>Support for Thrift language</description>
-  <change-notes>
-    <![CDATA[
-      <p>0.5:</p>
-      <ul>
-        <li>Rename Refactoring fixes</li>
-      </ul>
-      <p>0.4:</p>
-      <ul>
-        <li>Bug fixes</li>
-      </ul>
-      <p>0.3:</p>
-      <ul>
-        <li>Find usages</li>
-        <li>Structure View</li>
-        <li>Fields and Functions in Go to by Symbol Name</li>
-      </ul>
-      <p>0.2:</p>
-      <ul>
-        <li>References</li>
-        <li>Go to implementation</li>
-        <li>Icons</li>
-      </ul>
-      <p>0.1:</p>
-      <ul>
-        <li>Syntax error highlighting via parser</li>
-        <li>Simple code highlighting</li>
-        <li>Completion</li>
-        <li>Commenter</li>
-        <li>Brace matching</li>
-        <li>Quote handler</li>
-      </ul>
-      ]]>
-  </change-notes>
-  <version>0.5</version>
+  <version>SNAPSHOT</version>
   <vendor>Twitter, Inc.</vendor>
 
   <extensions defaultExtensionNs="com.intellij">
