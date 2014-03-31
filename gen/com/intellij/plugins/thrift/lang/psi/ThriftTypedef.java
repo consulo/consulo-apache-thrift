@@ -8,18 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface ThriftTypedef extends ThriftTopLevelDeclaration {
 
   @Nullable
-  ThriftBaseType getBaseType();
-
-  @Nullable
   ThriftDefinitionName getDefinitionName();
 
   @Nullable
-  ThriftListType getListType();
+  ThriftFieldType getFieldType();
 
   @Nullable
-  ThriftMapType getMapType();
-
-  @Nullable
-  ThriftSetType getSetType();
+  ThriftTypeAnnotations getTypeAnnotations();
 
 }

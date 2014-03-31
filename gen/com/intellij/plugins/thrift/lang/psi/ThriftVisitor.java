@@ -113,6 +113,10 @@ public class ThriftVisitor extends PsiElementVisitor {
     visitTopLevelDeclaration(o);
   }
 
+  public void visitServiceSuperName(@NotNull ThriftServiceSuperName o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitSetType(@NotNull ThriftSetType o) {
     visitPsiCompositeElement(o);
   }
@@ -122,6 +126,18 @@ public class ThriftVisitor extends PsiElementVisitor {
   }
 
   public void visitThrows(@NotNull ThriftThrows o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitTypeAnnotation(@NotNull ThriftTypeAnnotation o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitTypeAnnotationList(@NotNull ThriftTypeAnnotationList o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitTypeAnnotations(@NotNull ThriftTypeAnnotations o) {
     visitPsiCompositeElement(o);
   }
 

@@ -1,12 +1,12 @@
 package com.intellij.plugins.thrift;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
+import com.intellij.icons.AllIcons;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 
 /**
  * Created by fkorotkov.
@@ -42,6 +42,6 @@ public class ThriftFileType extends LanguageFileType {
   @Nullable
   @Override
   public Icon getIcon() {
-    return AllIcons.FileTypes.Custom;
+    return AllIcons.Providers.Apache;
   }
 }

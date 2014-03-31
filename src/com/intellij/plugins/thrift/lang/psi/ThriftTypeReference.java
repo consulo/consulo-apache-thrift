@@ -1,5 +1,10 @@
 package com.intellij.plugins.thrift.lang.psi;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
@@ -12,18 +17,13 @@ import com.intellij.util.ArrayUtil;
 import com.intellij.util.Function;
 import com.intellij.util.PathUtil;
 import com.intellij.util.Processor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by fkorotkov.
  */
 public class ThriftTypeReference extends PsiReferenceBase<ThriftCustomType> {
   public ThriftTypeReference(@NotNull ThriftCustomType element, int offset) {
-    super(element, TextRange.create(offset, element.getTextLength() - offset));
+    super(element, TextRange.create(offset, element.getTextLength()));
   }
 
   @Nullable

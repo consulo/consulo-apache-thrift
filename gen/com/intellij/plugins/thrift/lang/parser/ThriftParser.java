@@ -1,16 +1,16 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.plugins.thrift.lang.parser;
 
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
-
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import com.intellij.lang.PsiParser;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.openapi.diagnostic.Logger;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.lang.PsiParser;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class ThriftParser implements PsiParser {
@@ -99,6 +99,9 @@ public class ThriftParser implements PsiParser {
     else if (root_ == SERVICE) {
       result_ = Service(builder_, level_ + 1);
     }
+    else if (root_ == SERVICE_SUPER_NAME) {
+      result_ = ServiceSuperName(builder_, level_ + 1);
+    }
     else if (root_ == SET_TYPE) {
       result_ = SetType(builder_, level_ + 1);
     }
@@ -107,6 +110,15 @@ public class ThriftParser implements PsiParser {
     }
     else if (root_ == THROWS) {
       result_ = Throws(builder_, level_ + 1);
+    }
+    else if (root_ == TYPE_ANNOTATION) {
+      result_ = TypeAnnotation(builder_, level_ + 1);
+    }
+    else if (root_ == TYPE_ANNOTATION_LIST) {
+      result_ = TypeAnnotationList(builder_, level_ + 1);
+    }
+    else if (root_ == TYPE_ANNOTATIONS) {
+      result_ = TypeAnnotations(builder_, level_ + 1);
     }
     else if (root_ == TYPEDEF) {
       result_ = Typedef(builder_, level_ + 1);
@@ -360,18 +372,6 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // BaseType | ContainerType
-  static boolean DefinitionType(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "DefinitionType")) return false;
-    boolean result_ = false;
-    Marker marker_ = enter_section_(builder_);
-    result_ = BaseType(builder_, level_ + 1);
-    if (!result_) result_ = ContainerType(builder_, level_ + 1);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  /* ********************************************************** */
   // topLevelElement*
   static boolean Document(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Document")) return false;
@@ -419,7 +419,7 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'enum' DefinitionName '{' enumFields '}'
+  // 'enum' DefinitionName '{' enumFields '}' TypeAnnotations?
   public static boolean Enum(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Enum")) return false;
     boolean result_ = false;
@@ -430,13 +430,21 @@ public class ThriftParser implements PsiParser {
     result_ = result_ && report_error_(builder_, DefinitionName(builder_, level_ + 1));
     result_ = pinned_ && report_error_(builder_, consumeToken(builder_, LEFTCURLYBRACE)) && result_;
     result_ = pinned_ && report_error_(builder_, enumFields(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && consumeToken(builder_, RIGHTCURLYBRACE) && result_;
+    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, RIGHTCURLYBRACE)) && result_;
+    result_ = pinned_ && Enum_5(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, ENUM, result_, pinned_, null);
     return result_ || pinned_;
   }
 
+  // TypeAnnotations?
+  private static boolean Enum_5(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "Enum_5")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
+  }
+
   /* ********************************************************** */
-  // 'exception' DefinitionName '{' fields '}'
+  // 'exception' DefinitionName '{' fields '}' TypeAnnotations?
   public static boolean Exception(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Exception")) return false;
     boolean result_ = false;
@@ -447,13 +455,21 @@ public class ThriftParser implements PsiParser {
     result_ = result_ && report_error_(builder_, DefinitionName(builder_, level_ + 1));
     result_ = pinned_ && report_error_(builder_, consumeToken(builder_, LEFTCURLYBRACE)) && result_;
     result_ = pinned_ && report_error_(builder_, fields(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && consumeToken(builder_, RIGHTCURLYBRACE) && result_;
+    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, RIGHTCURLYBRACE)) && result_;
+    result_ = pinned_ && Exception_5(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, EXCEPTION, result_, pinned_, null);
     return result_ || pinned_;
   }
 
+  // TypeAnnotations?
+  private static boolean Exception_5(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "Exception_5")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
+  }
+
   /* ********************************************************** */
-  // FieldID? FieldReq? FieldType DefinitionName ('=' ConstValue)? XsdFieldOptions ListSeparator?
+  // FieldID? FieldReq? FieldType DefinitionName ('=' ConstValue)? XsdFieldOptions TypeAnnotations? ListSeparator?
   public static boolean Field(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Field")) return false;
     boolean result_ = false;
@@ -466,7 +482,8 @@ public class ThriftParser implements PsiParser {
     result_ = result_ && report_error_(builder_, DefinitionName(builder_, level_ + 1));
     result_ = pinned_ && report_error_(builder_, Field_4(builder_, level_ + 1)) && result_;
     result_ = pinned_ && report_error_(builder_, XsdFieldOptions(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && Field_6(builder_, level_ + 1) && result_;
+    result_ = pinned_ && report_error_(builder_, Field_6(builder_, level_ + 1)) && result_;
+    result_ = pinned_ && Field_7(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, FIELD, result_, pinned_, fieldRecovery_parser_);
     return result_ || pinned_;
   }
@@ -503,9 +520,16 @@ public class ThriftParser implements PsiParser {
     return result_;
   }
 
-  // ListSeparator?
+  // TypeAnnotations?
   private static boolean Field_6(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Field_6")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
+  }
+
+  // ListSeparator?
+  private static boolean Field_7(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "Field_7")) return false;
     ListSeparator(builder_, level_ + 1);
     return true;
   }
@@ -548,7 +572,7 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'oneway'? FunctionType DefinitionName '(' fieldsWithBraceRecovery ')' Throws?
+  // 'oneway'? FunctionType DefinitionName '(' fieldsWithBraceRecovery ')' Throws? TypeAnnotations?
   public static boolean Function(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Function")) return false;
     boolean result_ = false;
@@ -561,7 +585,8 @@ public class ThriftParser implements PsiParser {
     result_ = result_ && report_error_(builder_, consumeToken(builder_, LEFTBRACE));
     result_ = pinned_ && report_error_(builder_, fieldsWithBraceRecovery(builder_, level_ + 1)) && result_;
     result_ = pinned_ && report_error_(builder_, consumeToken(builder_, RIGHTBRACE)) && result_;
-    result_ = pinned_ && Function_6(builder_, level_ + 1) && result_;
+    result_ = pinned_ && report_error_(builder_, Function_6(builder_, level_ + 1)) && result_;
+    result_ = pinned_ && Function_7(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, FUNCTION, result_, pinned_, functionRecovery_parser_);
     return result_ || pinned_;
   }
@@ -577,6 +602,13 @@ public class ThriftParser implements PsiParser {
   private static boolean Function_6(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Function_6")) return false;
     Throws(builder_, level_ + 1);
+    return true;
+  }
+
+  // TypeAnnotations?
+  private static boolean Function_7(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "Function_7")) return false;
+    TypeAnnotations(builder_, level_ + 1);
     return true;
   }
 
@@ -751,7 +783,7 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'senum' DefinitionName '{' senumBody '}'
+  // 'senum' DefinitionName '{' senumBody '}' TypeAnnotations?
   public static boolean Senum(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Senum")) return false;
     boolean result_ = false;
@@ -762,13 +794,21 @@ public class ThriftParser implements PsiParser {
     result_ = result_ && report_error_(builder_, DefinitionName(builder_, level_ + 1));
     result_ = pinned_ && report_error_(builder_, consumeToken(builder_, LEFTCURLYBRACE)) && result_;
     result_ = pinned_ && report_error_(builder_, senumBody(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && consumeToken(builder_, RIGHTCURLYBRACE) && result_;
+    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, RIGHTCURLYBRACE)) && result_;
+    result_ = pinned_ && Senum_5(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, SENUM, result_, pinned_, null);
     return result_ || pinned_;
   }
 
+  // TypeAnnotations?
+  private static boolean Senum_5(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "Senum_5")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
+  }
+
   /* ********************************************************** */
-  // 'service' DefinitionName ( 'extends' Identifier )? '{' serviceBody '}'
+  // 'service' DefinitionName ( 'extends' ServiceSuperName )? '{' serviceBody '}' TypeAnnotations?
   public static boolean Service(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Service")) return false;
     boolean result_ = false;
@@ -780,26 +820,46 @@ public class ThriftParser implements PsiParser {
     result_ = pinned_ && report_error_(builder_, Service_2(builder_, level_ + 1)) && result_;
     result_ = pinned_ && report_error_(builder_, consumeToken(builder_, LEFTCURLYBRACE)) && result_;
     result_ = pinned_ && report_error_(builder_, serviceBody(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && consumeToken(builder_, RIGHTCURLYBRACE) && result_;
+    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, RIGHTCURLYBRACE)) && result_;
+    result_ = pinned_ && Service_6(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, SERVICE, result_, pinned_, null);
     return result_ || pinned_;
   }
 
-  // ( 'extends' Identifier )?
+  // ( 'extends' ServiceSuperName )?
   private static boolean Service_2(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Service_2")) return false;
     Service_2_0(builder_, level_ + 1);
     return true;
   }
 
-  // 'extends' Identifier
+  // 'extends' ServiceSuperName
   private static boolean Service_2_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Service_2_0")) return false;
     boolean result_ = false;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, "extends");
-    result_ = result_ && consumeToken(builder_, IDENTIFIER);
+    result_ = result_ && ServiceSuperName(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // TypeAnnotations?
+  private static boolean Service_6(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "Service_6")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // Identifier
+  public static boolean ServiceSuperName(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "ServiceSuperName")) return false;
+    if (!nextTokenIs(builder_, IDENTIFIER)) return false;
+    boolean result_ = false;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, IDENTIFIER);
+    exit_section_(builder_, marker_, SERVICE_SUPER_NAME, result_);
     return result_;
   }
 
@@ -828,7 +888,7 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'struct' DefinitionName 'xsd_all'? '{' fields '}'
+  // 'struct' DefinitionName 'xsd_all'? '{' fields '}' TypeAnnotations?
   public static boolean Struct(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Struct")) return false;
     boolean result_ = false;
@@ -840,7 +900,8 @@ public class ThriftParser implements PsiParser {
     result_ = pinned_ && report_error_(builder_, Struct_2(builder_, level_ + 1)) && result_;
     result_ = pinned_ && report_error_(builder_, consumeToken(builder_, LEFTCURLYBRACE)) && result_;
     result_ = pinned_ && report_error_(builder_, fields(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && consumeToken(builder_, RIGHTCURLYBRACE) && result_;
+    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, RIGHTCURLYBRACE)) && result_;
+    result_ = pinned_ && Struct_6(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, STRUCT, result_, pinned_, null);
     return result_ || pinned_;
   }
@@ -849,6 +910,13 @@ public class ThriftParser implements PsiParser {
   private static boolean Struct_2(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Struct_2")) return false;
     consumeToken(builder_, "xsd_all");
+    return true;
+  }
+
+  // TypeAnnotations?
+  private static boolean Struct_6(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "Struct_6")) return false;
+    TypeAnnotations(builder_, level_ + 1);
     return true;
   }
 
@@ -869,7 +937,62 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'typedef' DefinitionType DefinitionName
+  // Identifier '=' Literal ListSeparator?
+  public static boolean TypeAnnotation(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "TypeAnnotation")) return false;
+    if (!nextTokenIs(builder_, IDENTIFIER)) return false;
+    boolean result_ = false;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, IDENTIFIER);
+    result_ = result_ && consumeToken(builder_, EQUALS);
+    result_ = result_ && consumeToken(builder_, LITERAL);
+    result_ = result_ && TypeAnnotation_3(builder_, level_ + 1);
+    exit_section_(builder_, marker_, TYPE_ANNOTATION, result_);
+    return result_;
+  }
+
+  // ListSeparator?
+  private static boolean TypeAnnotation_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "TypeAnnotation_3")) return false;
+    ListSeparator(builder_, level_ + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // TypeAnnotation*
+  public static boolean TypeAnnotationList(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "TypeAnnotationList")) return false;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<type annotation list>");
+    int offset_ = builder_.getCurrentOffset();
+    while (true) {
+      if (!TypeAnnotation(builder_, level_ + 1)) break;
+      int next_offset_ = builder_.getCurrentOffset();
+      if (offset_ == next_offset_) {
+        empty_element_parsed_guard_(builder_, offset_, "TypeAnnotationList");
+        break;
+      }
+      offset_ = next_offset_;
+    }
+    exit_section_(builder_, level_, marker_, TYPE_ANNOTATION_LIST, true, false, braceRecovery_parser_);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // '(' TypeAnnotationList ')'
+  public static boolean TypeAnnotations(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "TypeAnnotations")) return false;
+    if (!nextTokenIs(builder_, LEFTBRACE)) return false;
+    boolean result_ = false;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, LEFTBRACE);
+    result_ = result_ && TypeAnnotationList(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHTBRACE);
+    exit_section_(builder_, marker_, TYPE_ANNOTATIONS, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // 'typedef' FieldType DefinitionName TypeAnnotations?
   public static boolean Typedef(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Typedef")) return false;
     boolean result_ = false;
@@ -877,10 +1000,18 @@ public class ThriftParser implements PsiParser {
     Marker marker_ = enter_section_(builder_, level_, _NONE_, "<typedef>");
     result_ = consumeToken(builder_, "typedef");
     pinned_ = result_; // pin = 1
-    result_ = result_ && report_error_(builder_, DefinitionType(builder_, level_ + 1));
-    result_ = pinned_ && DefinitionName(builder_, level_ + 1) && result_;
+    result_ = result_ && report_error_(builder_, FieldType(builder_, level_ + 1));
+    result_ = pinned_ && report_error_(builder_, DefinitionName(builder_, level_ + 1)) && result_;
+    result_ = pinned_ && Typedef_3(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, TYPEDEF, result_, pinned_, null);
     return result_ || pinned_;
+  }
+
+  // TypeAnnotations?
+  private static boolean Typedef_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "Typedef_3")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -1001,7 +1132,7 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // Identifier ('=' IntConstant)? ListSeparator?
+  // Identifier ('=' IntConstant)? TypeAnnotations? ListSeparator?
   public static boolean enumField(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumField")) return false;
     boolean result_ = false;
@@ -1009,6 +1140,7 @@ public class ThriftParser implements PsiParser {
     result_ = consumeToken(builder_, IDENTIFIER);
     result_ = result_ && enumField_1(builder_, level_ + 1);
     result_ = result_ && enumField_2(builder_, level_ + 1);
+    result_ = result_ && enumField_3(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, ENUM_FIELD, result_, false, enumFieldRecovery_parser_);
     return result_;
   }
@@ -1031,9 +1163,16 @@ public class ThriftParser implements PsiParser {
     return result_;
   }
 
-  // ListSeparator?
+  // TypeAnnotations?
   private static boolean enumField_2(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumField_2")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
+  }
+
+  // ListSeparator?
+  private static boolean enumField_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "enumField_3")) return false;
     ListSeparator(builder_, level_ + 1);
     return true;
   }

@@ -1,25 +1,38 @@
 package com.intellij.plugins.thrift.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.ChooseByNameRegistry;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.plugins.thrift.ThriftClassContributor;
 import com.intellij.plugins.thrift.ThriftFileType;
-import com.intellij.plugins.thrift.lang.psi.*;
-import com.intellij.psi.*;
+import com.intellij.plugins.thrift.lang.psi.ThriftCustomType;
+import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
+import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
+import com.intellij.plugins.thrift.lang.psi.ThriftInclude;
+import com.intellij.plugins.thrift.lang.psi.ThriftPrefixReference;
+import com.intellij.plugins.thrift.lang.psi.ThriftTypeReference;
+import com.intellij.psi.NavigatablePsiElement;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiFileSystemItem;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.util.PathUtil;
 import com.intellij.util.Processor;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by fkorotkov.
@@ -27,8 +40,35 @@ import java.util.List;
 public class ThriftPsiUtil {
   @Nullable
   public static PsiFile resolveInclude(@Nullable ThriftInclude include) {
-    final PsiFileSystemItem target = include != null ? getReferenceSet(include).resolve() : null;
-    return target instanceof PsiFile ? (PsiFile)target : null;
+    if (include == null) {
+      return null;
+    }
+    final PsiFileSystemItem target = getReferenceSet(include).resolve();
+    if (target instanceof PsiFile) {
+      return (PsiFile)target;
+    }
+    // check current dir
+    PsiFile psiFile = include.getContainingFile();
+    if (psiFile == null) {
+      return null;
+    }
+    PsiDirectory directory = psiFile.getContainingDirectory();
+    String includePath = include.getPath();
+    PsiFile fileInDir = directory != null ? directory.findFile(PathUtil.getFileName(includePath)) : null;
+    if (fileInDir != null) {
+      return fileInDir;
+    }
+
+    ProjectRootManager rootManager = ProjectRootManager.getInstance(include.getProject());
+    VirtualFile[] contentRoots = rootManager.getContentSourceRoots();
+    for (VirtualFile contentRoot : contentRoots) {
+      VirtualFile includedVirtualFile = contentRoot.findFileByRelativePath(includePath);
+      if (includedVirtualFile != null) {
+        return include.getManager().findFile(includedVirtualFile);
+      }
+    }
+
+    return null;
   }
 
   @NotNull

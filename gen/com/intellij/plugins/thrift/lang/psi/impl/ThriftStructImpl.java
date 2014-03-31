@@ -30,6 +30,12 @@ public class ThriftStructImpl extends ThriftTopLevelDeclarationImpl implements T
 
   @Override
   @Nullable
+  public ThriftTypeAnnotations getTypeAnnotations() {
+    return findChildByClass(ThriftTypeAnnotations.class);
+  }
+
+  @Override
+  @Nullable
   public ThriftFields getFields() {
     return findChildByClass(ThriftFields.class);
   }

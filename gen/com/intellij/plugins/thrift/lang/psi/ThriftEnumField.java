@@ -13,4 +13,7 @@ public interface ThriftEnumField extends ThriftPsiCompositeElement {
   @Nullable
   ThriftListSeparator getListSeparator();
 
+  @Nullable
+  ThriftTypeAnnotations getTypeAnnotations();
+
 }

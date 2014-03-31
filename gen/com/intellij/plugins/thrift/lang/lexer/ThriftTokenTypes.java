@@ -40,10 +40,14 @@ public interface ThriftTokenTypes {
   IElementType SENUM_BODY = new ThriftElementType("SENUM_BODY");
   IElementType SERVICE = new ThriftElementType("SERVICE");
   IElementType SERVICE_BODY = new ThriftElementType("SERVICE_BODY");
+  IElementType SERVICE_SUPER_NAME = new ThriftElementType("SERVICE_SUPER_NAME");
   IElementType SET_TYPE = new ThriftElementType("SET_TYPE");
   IElementType STRUCT = new ThriftElementType("STRUCT");
   IElementType THROWS = new ThriftElementType("THROWS");
   IElementType TYPEDEF = new ThriftElementType("TYPEDEF");
+  IElementType TYPE_ANNOTATION = new ThriftElementType("TYPE_ANNOTATION");
+  IElementType TYPE_ANNOTATIONS = new ThriftElementType("TYPE_ANNOTATIONS");
+  IElementType TYPE_ANNOTATION_LIST = new ThriftElementType("TYPE_ANNOTATION_LIST");
   IElementType UNION = new ThriftElementType("UNION");
   IElementType XSD_ATTRS = new ThriftElementType("XSD_ATTRS");
   IElementType XSD_FIELD_OPTIONS = new ThriftElementType("XSD_FIELD_OPTIONS");
@@ -170,6 +174,9 @@ public interface ThriftTokenTypes {
       else if (type == SERVICE_BODY) {
         return new ThriftServiceBodyImpl(node);
       }
+      else if (type == SERVICE_SUPER_NAME) {
+        return new ThriftServiceSuperNameImpl(node);
+      }
       else if (type == SET_TYPE) {
         return new ThriftSetTypeImpl(node);
       }
@@ -181,6 +188,15 @@ public interface ThriftTokenTypes {
       }
       else if (type == TYPEDEF) {
         return new ThriftTypedefImpl(node);
+      }
+      else if (type == TYPE_ANNOTATION) {
+        return new ThriftTypeAnnotationImpl(node);
+      }
+      else if (type == TYPE_ANNOTATIONS) {
+        return new ThriftTypeAnnotationsImpl(node);
+      }
+      else if (type == TYPE_ANNOTATION_LIST) {
+        return new ThriftTypeAnnotationListImpl(node);
       }
       else if (type == UNION) {
         return new ThriftUnionImpl(node);
