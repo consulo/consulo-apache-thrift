@@ -40,4 +40,10 @@ public class ThriftEnumFieldImpl extends ThriftPsiCompositeElementImpl implement
     return findChildByClass(ThriftTypeAnnotations.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getIdentifier() {
+    return findNotNullChildByType(IDENTIFIER);
+  }
+
 }
