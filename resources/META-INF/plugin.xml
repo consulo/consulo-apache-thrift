@@ -50,5 +50,7 @@
 						 key="thrift.inspection.unresolved.include"
 						 groupKey="inspections.group.name" enabledByDefault="true"
 						 implementationClass="com.intellij.plugins.thrift.inspections.ThriftUnresolvedIncludeInspection"/>
+
+		<taskByVfsChange implementation="org.mustbe.consulo.apache.thrift.vfs.backgroundTask.ThriftBackgroundTaskByVfsChangeProvider" />
 	</extensions>
 </idea-plugin>
