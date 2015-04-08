@@ -14,7 +14,6 @@ import com.intellij.plugins.thrift.lang.psi.ThriftStruct;
 import com.intellij.plugins.thrift.lang.psi.ThriftTypedef;
 import com.intellij.plugins.thrift.lang.psi.ThriftUnion;
 import com.intellij.psi.PsiElement;
-import icons.ThriftIcons;
 
 public class ThriftIconProvider implements IconDescriptorUpdater
 {
@@ -23,31 +22,31 @@ public class ThriftIconProvider implements IconDescriptorUpdater
 	{
 		if(element instanceof ThriftConst)
 		{
-			iconDescriptor.setMainIcon(ThriftIcons.CONST);
+			iconDescriptor.setMainIcon(AllIcons.Nodes.Value);
 		}
 		if(element instanceof ThriftEnum)
 		{
-			iconDescriptor.setMainIcon(ThriftIcons.ENUM);
+			iconDescriptor.setMainIcon(AllIcons.Nodes.Enum);
 		}
 		if(element instanceof ThriftException)
 		{
-			iconDescriptor.setMainIcon(ThriftIcons.EXCEPTION);
+			iconDescriptor.setMainIcon(AllIcons.Nodes.ExceptionClass);
 		}
 		if(element instanceof ThriftService)
 		{
-			iconDescriptor.setMainIcon(ThriftIcons.SERVICE);
+			iconDescriptor.setMainIcon(AllIcons.Nodes.Static);
 		}
 		if(element instanceof ThriftStruct)
 		{
-			iconDescriptor.setMainIcon(ThriftIcons.STRUCT);
+			iconDescriptor.setMainIcon(AllIcons.Nodes.Struct);
 		}
 		if(element instanceof ThriftTypedef)
 		{
-			iconDescriptor.setMainIcon(ThriftIcons.TYPEDEF);
+			iconDescriptor.setMainIcon(AllIcons.Nodes.TypeAlias);
 		}
 		if(element instanceof ThriftUnion)
 		{
-			iconDescriptor.setMainIcon(ThriftIcons.UNION);
+			iconDescriptor.setMainIcon(AllIcons.Nodes.AnonymousClass);
 		}
 		if(element instanceof ThriftField)
 		{
