@@ -9,6 +9,7 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.plugins.thrift.highlight.ThriftSyntaxHighlighterColors;
 import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
+import com.intellij.plugins.thrift.lang.psi.ThriftCustomType;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
 import com.intellij.plugins.thrift.lang.psi.ThriftException;
 import com.intellij.plugins.thrift.lang.psi.ThriftService;
@@ -18,6 +19,7 @@ import com.intellij.plugins.thrift.lang.psi.ThriftUnion;
 import com.intellij.plugins.thrift.lang.psi.ThriftVisitor;
 import com.intellij.plugins.thrift.util.ThriftUtils;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 
@@ -45,6 +47,26 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 			{
 				annotateKeyword(element);
 			}
+		}
+	}
+
+	@Override
+	public void visitCustomType(@NotNull ThriftCustomType o)
+	{
+		PsiElement identifier = o.getIdentifier();
+		for(PsiReference psiReference : o.getReferences())
+		{
+			PsiElement resolved = psiReference.resolve();
+			if(resolved == null)
+			{
+				continue;
+			}
+			if(resolved instanceof ThriftDefinitionName)
+			{
+				resolved = resolved.getParent();
+			}
+			highlightName(resolved, identifier);
+			break;
 		}
 	}
 
@@ -80,7 +102,8 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 
 	private static TextAttributesKey getAttributesKey(PsiElement element)
 	{
-		if(element instanceof ThriftService || element instanceof ThriftUnion || element instanceof ThriftStruct || element instanceof ThriftException)
+		if(element instanceof ThriftService || element instanceof ThriftUnion || element instanceof ThriftStruct || element instanceof
+				ThriftException)
 		{
 			return DefaultLanguageHighlighterColors.CLASS_NAME;
 		}
@@ -91,11 +114,16 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 		return null;
 	}
 
-	private void highlightName(@NotNull PsiElement parent, @Nullable ThriftDefinitionName definitionName)
+	private void highlightName(@NotNull PsiElement parent, @Nullable PsiElement target)
 	{
-		if(definitionName == null)
+		if(target == null)
 		{
 			return;
+		}
+
+		if(target instanceof ThriftDefinitionName)
+		{
+			target = ((ThriftDefinitionName) target).getNameIdentifier();
 		}
 
 		TextAttributesKey attributesKey = getAttributesKey(parent);
@@ -103,7 +131,7 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 		{
 			return;
 		}
-		Annotation annotation = myAnnotationHolder.createInfoAnnotation(definitionName.getNameIdentifier(), null);
+		Annotation annotation = myAnnotationHolder.createInfoAnnotation(target, null);
 		annotation.setTextAttributes(attributesKey);
 	}
 
