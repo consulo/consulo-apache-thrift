@@ -12,6 +12,7 @@ import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
 import com.intellij.plugins.thrift.lang.psi.ThriftCustomType;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
 import com.intellij.plugins.thrift.lang.psi.ThriftException;
+import com.intellij.plugins.thrift.lang.psi.ThriftField;
 import com.intellij.plugins.thrift.lang.psi.ThriftService;
 import com.intellij.plugins.thrift.lang.psi.ThriftStruct;
 import com.intellij.plugins.thrift.lang.psi.ThriftTypedef;
@@ -100,6 +101,12 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 		highlightName(o, o.getDefinitionName());
 	}
 
+	@Override
+	public void visitField(@NotNull ThriftField o)
+	{
+		highlightName(o, o.getDefinitionName());
+	}
+
 	private static TextAttributesKey getAttributesKey(PsiElement element)
 	{
 		if(element instanceof ThriftService || element instanceof ThriftUnion || element instanceof ThriftStruct || element instanceof
@@ -110,6 +117,10 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 		else if(element instanceof ThriftTypedef)
 		{
 			return DefaultLanguageHighlighterColors.TYPE_ALIAS_NAME;
+		}
+		else if(element instanceof ThriftField)
+		{
+			return DefaultLanguageHighlighterColors.INSTANCE_FIELD;
 		}
 		return null;
 	}
