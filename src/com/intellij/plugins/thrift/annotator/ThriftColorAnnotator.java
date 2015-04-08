@@ -10,6 +10,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.plugins.thrift.highlight.ThriftSyntaxHighlighterColors;
 import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
+import com.intellij.plugins.thrift.lang.psi.ThriftException;
 import com.intellij.plugins.thrift.lang.psi.ThriftService;
 import com.intellij.plugins.thrift.lang.psi.ThriftStruct;
 import com.intellij.plugins.thrift.lang.psi.ThriftTypedef;
@@ -50,35 +51,60 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 	@Override
 	public void visitStruct(@NotNull ThriftStruct o)
 	{
-		highlightName(o.getDefinitionName(), DefaultLanguageHighlighterColors.CLASS_NAME);
+		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
 	public void visitUnion(@NotNull ThriftUnion o)
 	{
-		highlightName(o.getDefinitionName(), DefaultLanguageHighlighterColors.CLASS_NAME);
+		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
 	public void visitTypedef(@NotNull ThriftTypedef o)
 	{
-		highlightName(o.getDefinitionName(), DefaultLanguageHighlighterColors.TYPE_ALIAS_NAME);
+		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
 	public void visitService(@NotNull ThriftService o)
 	{
-		highlightName(o.getDefinitionName(), DefaultLanguageHighlighterColors.CLASS_NAME);
+		highlightName(o, o.getDefinitionName());
 	}
 
-	private void highlightName(@Nullable ThriftDefinitionName definitionName, TextAttributesKey key)
+	@Override
+	public void visitException(@NotNull ThriftException o)
+	{
+		highlightName(o, o.getDefinitionName());
+	}
+
+	private static TextAttributesKey getAttributesKey(PsiElement element)
+	{
+		if(element instanceof ThriftService || element instanceof ThriftUnion || element instanceof ThriftStruct || element instanceof ThriftException)
+		{
+			return DefaultLanguageHighlighterColors.CLASS_NAME;
+		}
+		else if(element instanceof ThriftTypedef)
+		{
+			return DefaultLanguageHighlighterColors.TYPE_ALIAS_NAME;
+		}
+		return null;
+	}
+
+	private void highlightName(@NotNull PsiElement parent, @Nullable ThriftDefinitionName definitionName)
 	{
 		if(definitionName == null)
 		{
 			return;
 		}
+
+		TextAttributesKey attributesKey = getAttributesKey(parent);
+		if(attributesKey == null)
+		{
+			return;
+		}
 		Annotation annotation = myAnnotationHolder.createInfoAnnotation(definitionName.getNameIdentifier(), null);
-		annotation.setTextAttributes(key);
+		annotation.setTextAttributes(attributesKey);
 	}
 
 	private void annotateKeyword(@NotNull PsiElement element)
