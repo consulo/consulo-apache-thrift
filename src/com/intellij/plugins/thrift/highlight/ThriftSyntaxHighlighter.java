@@ -21,7 +21,7 @@ public class ThriftSyntaxHighlighter extends SyntaxHighlighterBase {
   private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
   static {
-    fillMap(ATTRIBUTES, OPERATORS, ThriftSyntaxHighlighterColors.OPERATION_SIGN);
+    safeMap(ATTRIBUTES, OPERATORS, ThriftSyntaxHighlighterColors.OPERATION_SIGN);
 
     ATTRIBUTES.put(NUMBER, ThriftSyntaxHighlighterColors.NUMBER);
     ATTRIBUTES.put(INTEGER, ThriftSyntaxHighlighterColors.NUMBER);
@@ -43,14 +43,16 @@ public class ThriftSyntaxHighlighter extends SyntaxHighlighterBase {
     ATTRIBUTES.put(BLOCKCOMMENT, ThriftSyntaxHighlighterColors.BLOCK_COMMENT);
     ATTRIBUTES.put(COMMENT, ThriftSyntaxHighlighterColors.LINE_COMMENT);
 
-    fillMap(ATTRIBUTES, BAD_TOKENS, ThriftSyntaxHighlighterColors.BAD_CHARACTER);
+      safeMap(ATTRIBUTES, BAD_TOKENS, ThriftSyntaxHighlighterColors.BAD_CHARACTER);
   }
 
+  @Override
   @NotNull
   public Lexer getHighlightingLexer() {
     return new ThriftLexer();
   }
 
+  @Override
   @NotNull
   public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     return pack(ATTRIBUTES.get(tokenType));
