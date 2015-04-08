@@ -9,15 +9,7 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.plugins.thrift.highlight.ThriftSyntaxHighlighterColors;
 import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
-import com.intellij.plugins.thrift.lang.psi.ThriftCustomType;
-import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
-import com.intellij.plugins.thrift.lang.psi.ThriftException;
-import com.intellij.plugins.thrift.lang.psi.ThriftField;
-import com.intellij.plugins.thrift.lang.psi.ThriftService;
-import com.intellij.plugins.thrift.lang.psi.ThriftStruct;
-import com.intellij.plugins.thrift.lang.psi.ThriftTypedef;
-import com.intellij.plugins.thrift.lang.psi.ThriftUnion;
-import com.intellij.plugins.thrift.lang.psi.ThriftVisitor;
+import com.intellij.plugins.thrift.lang.psi.*;
 import com.intellij.plugins.thrift.util.ThriftUtils;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
@@ -120,6 +112,10 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 		}
 		else if(element instanceof ThriftField)
 		{
+			if(element.getParent() instanceof ThriftThrows)
+			{
+				return DefaultLanguageHighlighterColors.LOCAL_VARIABLE;
+			}
 			return DefaultLanguageHighlighterColors.INSTANCE_FIELD;
 		}
 		return null;
