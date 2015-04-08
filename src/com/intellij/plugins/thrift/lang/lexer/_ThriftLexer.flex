@@ -5,16 +5,11 @@ import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
 
 %%
 
-%{
-  public _ThriftLexer() {
-    this((java.io.Reader)null);
-  }
-%}
 
 %public
 %class _ThriftLexer
-%implements FlexLexer
-%function advance
+%extends LexerBase
+%function advanceImpl
 %type IElementType
 %unicode
 
@@ -38,9 +33,8 @@ HEX_DIGIT = [0-9A-Fa-f]
 INT_DIGIT = [0-9]
 OCT_DIGIT = [0-7]
 
-NUM_INT = "0" | ([1-9] {INT_DIGIT}*)
+NUM_INT = {INT_DIGIT}+
 NUM_HEX = ("0x" | "0X") {HEX_DIGIT}+
-NUM_OCT = "0" {OCT_DIGIT}+
 
 FLOAT_EXPONENT = [eE] [+-]? {DIGIT}+
 NUM_FLOAT = ( (({DIGIT}* "." {DIGIT}+) | ({DIGIT}+ "." {DIGIT}*)) {FLOAT_EXPONENT}?) | ({DIGIT}+ {FLOAT_EXPONENT})
@@ -65,7 +59,6 @@ NUM_FLOAT = ( (({DIGIT}* "." {DIGIT}+) | ({DIGIT}+ "." {DIGIT}*)) {FLOAT_EXPONEN
   "-"                 { return MINUS; }
 
   {NUM_INT}                                {  return INTEGER; }
-  {NUM_OCT}                                {  return INTEGER; }
   {NUM_HEX}                                {  return INTEGER; }
   {NUM_FLOAT} / [^"."]                     {  return NUMBER; }
 

@@ -1,18 +1,18 @@
 package com.intellij.plugins.thrift.highlight;
 
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.plugins.thrift.lang.lexer.ThriftLexer;
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets.BAD_TOKENS;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets.OPERATORS;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets.BAD_TOKENS;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets.OPERATORS;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.lexer.Lexer;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.plugins.thrift.lang.lexer._ThriftLexer;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by fkorotkov.
@@ -49,7 +49,7 @@ public class ThriftSyntaxHighlighter extends SyntaxHighlighterBase {
   @Override
   @NotNull
   public Lexer getHighlightingLexer() {
-    return new ThriftLexer();
+    return new _ThriftLexer();
   }
 
   @Override
