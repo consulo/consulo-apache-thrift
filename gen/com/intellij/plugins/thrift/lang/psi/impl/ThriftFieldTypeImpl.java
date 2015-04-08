@@ -30,26 +30,14 @@ public class ThriftFieldTypeImpl extends ThriftPsiCompositeElementImpl implement
 
   @Override
   @Nullable
+  public ThriftContainerType getContainerType() {
+    return findChildByClass(ThriftContainerType.class);
+  }
+
+  @Override
+  @Nullable
   public ThriftCustomType getCustomType() {
     return findChildByClass(ThriftCustomType.class);
-  }
-
-  @Override
-  @Nullable
-  public ThriftListType getListType() {
-    return findChildByClass(ThriftListType.class);
-  }
-
-  @Override
-  @Nullable
-  public ThriftMapType getMapType() {
-    return findChildByClass(ThriftMapType.class);
-  }
-
-  @Override
-  @Nullable
-  public ThriftSetType getSetType() {
-    return findChildByClass(ThriftSetType.class);
   }
 
 }

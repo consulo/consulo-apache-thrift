@@ -29,9 +29,9 @@ public class ThriftMapTypeImpl extends ThriftPsiCompositeElementImpl implements 
   }
 
   @Override
-  @NotNull
-  public List<ThriftFieldType> getFieldTypeList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ThriftFieldType.class);
+  @Nullable
+  public ThriftGenericType getGenericType() {
+    return findChildByClass(ThriftGenericType.class);
   }
 
 }

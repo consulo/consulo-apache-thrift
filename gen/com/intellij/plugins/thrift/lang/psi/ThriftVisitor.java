@@ -29,6 +29,10 @@ public class ThriftVisitor extends PsiElementVisitor {
     visitPsiCompositeElement(o);
   }
 
+  public void visitContainerType(@NotNull ThriftContainerType o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitCppType(@NotNull ThriftCppType o) {
     visitPsiCompositeElement(o);
   }
@@ -77,6 +81,10 @@ public class ThriftVisitor extends PsiElementVisitor {
     visitPsiCompositeElement(o);
   }
 
+  public void visitGenericType(@NotNull ThriftGenericType o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitInclude(@NotNull ThriftInclude o) {
     visitPsiCompositeElement(o);
   }
@@ -118,6 +126,10 @@ public class ThriftVisitor extends PsiElementVisitor {
   }
 
   public void visitSetType(@NotNull ThriftSetType o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitSimpleBaseType(@NotNull ThriftSimpleBaseType o) {
     visitPsiCompositeElement(o);
   }
 

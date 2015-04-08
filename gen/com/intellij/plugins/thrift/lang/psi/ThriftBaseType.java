@@ -7,4 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface ThriftBaseType extends ThriftPsiCompositeElement {
 
+  @NotNull
+  ThriftSimpleBaseType getSimpleBaseType();
+
+  @Nullable
+  ThriftTypeAnnotations getTypeAnnotations();
+
 }

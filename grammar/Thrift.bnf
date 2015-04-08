@@ -105,7 +105,7 @@ Exception       ::=  'exception' DefinitionName '{' fields '}' TypeAnnotations?
 {pin=1 mixin="com.intellij.plugins.thrift.lang.psi.impl.ThriftTopLevelDeclarationImpl" implements="com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration"}
 Service         ::=  'service' DefinitionName ( 'extends' ServiceSuperName )? '{' serviceBody '}' TypeAnnotations?
 {pin=1 mixin="com.intellij.plugins.thrift.lang.psi.impl.ThriftTopLevelDeclarationImpl" implements="com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration"}
-ServiceSuperName ::= Identifier
+ServiceSuperName ::= CustomType
 serviceBody ::= (Function ListSeparator?)*
 {recoverWhile=functionsRecovery implements="com.intellij.plugins.thrift.lang.psi.ThriftDeclarationBody"}
 private functionsRecovery ::= !('}')
@@ -135,12 +135,15 @@ private fieldsWithBraceRecovery ::= Field* {recoverWhile=braceRecovery}
 Throws          ::=  'throws' '(' fieldsWithBraceRecovery ')' {pin=1}
 
 FieldType       ::=  BaseType | ContainerType | CustomType
-BaseType        ::=  'bool' | 'byte' | 'i16' | 'i32' | 'i64' | 'double' | 'string' | 'binary' | 'slist'
-private ContainerType   ::=  MapType | SetType | ListType
-MapType         ::=  'map' CppType? '<' FieldType ',' FieldType '>' {pin=1}
-SetType         ::=  'set' CppType? '<' FieldType '>' {pin=1}
-ListType        ::=  'list' '<' FieldType '>' CppType? {pin=1}
+BaseType        ::=  SimpleBaseType TypeAnnotations?
+SimpleBaseType  ::=  'bool' | 'byte' | 'i16' | 'i32' | 'i64' | 'double' | 'string' | 'binary' | 'slist'
+ContainerType   ::=  SimpleContainerType TypeAnnotations?
+private SimpleContainerType   ::=  MapType | SetType | ListType
+MapType         ::=  'map' CppType? GenericType {pin=1}
+SetType         ::=  'set' CppType? GenericType {pin=1}
+ListType        ::=  'list' GenericType CppType? {pin=1}
 CppType         ::=  'cpp_type' Literal {pin=1}
+GenericType     ::= '<' FieldType (',' FieldType)* '>' {pin=1}
 
 CustomType ::= Identifier {
   methods=[

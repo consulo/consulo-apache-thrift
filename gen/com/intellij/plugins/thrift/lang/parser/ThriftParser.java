@@ -1,16 +1,16 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.plugins.thrift.lang.parser;
 
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
-
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import com.intellij.lang.PsiParser;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.openapi.diagnostic.Logger;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.lang.PsiParser;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class ThriftParser implements PsiParser {
@@ -35,6 +35,9 @@ public class ThriftParser implements PsiParser {
     }
     else if (root_ == CONST_VALUE) {
       result_ = ConstValue(builder_, 0);
+    }
+    else if (root_ == CONTAINER_TYPE) {
+      result_ = ContainerType(builder_, 0);
     }
     else if (root_ == CPP_TYPE) {
       result_ = CppType(builder_, 0);
@@ -72,6 +75,9 @@ public class ThriftParser implements PsiParser {
     else if (root_ == FUNCTION_TYPE) {
       result_ = FunctionType(builder_, 0);
     }
+    else if (root_ == GENERIC_TYPE) {
+      result_ = GenericType(builder_, 0);
+    }
     else if (root_ == INCLUDE) {
       result_ = Include(builder_, 0);
     }
@@ -104,6 +110,9 @@ public class ThriftParser implements PsiParser {
     }
     else if (root_ == SET_TYPE) {
       result_ = SetType(builder_, 0);
+    }
+    else if (root_ == SIMPLE_BASE_TYPE) {
+      result_ = SimpleBaseType(builder_, 0);
     }
     else if (root_ == STRUCT) {
       result_ = Struct(builder_, 0);
@@ -162,22 +171,22 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'bool' | 'byte' | 'i16' | 'i32' | 'i64' | 'double' | 'string' | 'binary' | 'slist'
+  // SimpleBaseType TypeAnnotations?
   public static boolean BaseType(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "BaseType")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, "<base type>");
-    result_ = consumeToken(builder_, "bool");
-    if (!result_) result_ = consumeToken(builder_, "byte");
-    if (!result_) result_ = consumeToken(builder_, "i16");
-    if (!result_) result_ = consumeToken(builder_, "i32");
-    if (!result_) result_ = consumeToken(builder_, "i64");
-    if (!result_) result_ = consumeToken(builder_, "double");
-    if (!result_) result_ = consumeToken(builder_, "string");
-    if (!result_) result_ = consumeToken(builder_, "binary");
-    if (!result_) result_ = consumeToken(builder_, "slist");
+    result_ = SimpleBaseType(builder_, level_ + 1);
+    result_ = result_ && BaseType_1(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, BASE_TYPE, result_, false, null);
     return result_;
+  }
+
+  // TypeAnnotations?
+  private static boolean BaseType_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "BaseType_1")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -312,16 +321,22 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // MapType | SetType | ListType
-  static boolean ContainerType(PsiBuilder builder_, int level_) {
+  // SimpleContainerType TypeAnnotations?
+  public static boolean ContainerType(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "ContainerType")) return false;
     boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = MapType(builder_, level_ + 1);
-    if (!result_) result_ = SetType(builder_, level_ + 1);
-    if (!result_) result_ = ListType(builder_, level_ + 1);
-    exit_section_(builder_, marker_, null, result_);
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<container type>");
+    result_ = SimpleContainerType(builder_, level_ + 1);
+    result_ = result_ && ContainerType_1(builder_, level_ + 1);
+    exit_section_(builder_, level_, marker_, CONTAINER_TYPE, result_, false, null);
     return result_;
+  }
+
+  // TypeAnnotations?
+  private static boolean ContainerType_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "ContainerType_1")) return false;
+    TypeAnnotations(builder_, level_ + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -612,6 +627,46 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // '<' FieldType (',' FieldType)* '>'
+  public static boolean GenericType(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "GenericType")) return false;
+    if (!nextTokenIs(builder_, LT)) return false;
+    boolean result_;
+    boolean pinned_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, null);
+    result_ = consumeToken(builder_, LT);
+    pinned_ = result_; // pin = 1
+    result_ = result_ && report_error_(builder_, FieldType(builder_, level_ + 1));
+    result_ = pinned_ && report_error_(builder_, GenericType_2(builder_, level_ + 1)) && result_;
+    result_ = pinned_ && consumeToken(builder_, GT) && result_;
+    exit_section_(builder_, level_, marker_, GENERIC_TYPE, result_, pinned_, null);
+    return result_ || pinned_;
+  }
+
+  // (',' FieldType)*
+  private static boolean GenericType_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "GenericType_2")) return false;
+    int pos_ = current_position_(builder_);
+    while (true) {
+      if (!GenericType_2_0(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "GenericType_2", pos_)) break;
+      pos_ = current_position_(builder_);
+    }
+    return true;
+  }
+
+  // ',' FieldType
+  private static boolean GenericType_2_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "GenericType_2_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, COMMA);
+    result_ = result_ && FieldType(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
   // ('include' | 'cpp_include') Literal
   public static boolean Include(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Include")) return false;
@@ -680,7 +735,7 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // 'list' '<' FieldType '>' CppType?
+  // 'list' GenericType CppType?
   public static boolean ListType(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "ListType")) return false;
     boolean result_;
@@ -688,23 +743,21 @@ public class ThriftParser implements PsiParser {
     Marker marker_ = enter_section_(builder_, level_, _NONE_, "<list type>");
     result_ = consumeToken(builder_, "list");
     pinned_ = result_; // pin = 1
-    result_ = result_ && report_error_(builder_, consumeToken(builder_, LT));
-    result_ = pinned_ && report_error_(builder_, FieldType(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, GT)) && result_;
-    result_ = pinned_ && ListType_4(builder_, level_ + 1) && result_;
+    result_ = result_ && report_error_(builder_, GenericType(builder_, level_ + 1));
+    result_ = pinned_ && ListType_2(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, LIST_TYPE, result_, pinned_, null);
     return result_ || pinned_;
   }
 
   // CppType?
-  private static boolean ListType_4(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "ListType_4")) return false;
+  private static boolean ListType_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "ListType_2")) return false;
     CppType(builder_, level_ + 1);
     return true;
   }
 
   /* ********************************************************** */
-  // 'map' CppType? '<' FieldType ',' FieldType '>'
+  // 'map' CppType? GenericType
   public static boolean MapType(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "MapType")) return false;
     boolean result_;
@@ -713,11 +766,7 @@ public class ThriftParser implements PsiParser {
     result_ = consumeToken(builder_, "map");
     pinned_ = result_; // pin = 1
     result_ = result_ && report_error_(builder_, MapType_1(builder_, level_ + 1));
-    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, LT)) && result_;
-    result_ = pinned_ && report_error_(builder_, FieldType(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, COMMA)) && result_;
-    result_ = pinned_ && report_error_(builder_, FieldType(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && consumeToken(builder_, GT) && result_;
+    result_ = pinned_ && GenericType(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, MAP_TYPE, result_, pinned_, null);
     return result_ || pinned_;
   }
@@ -838,19 +887,19 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // Identifier
+  // CustomType
   public static boolean ServiceSuperName(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "ServiceSuperName")) return false;
     if (!nextTokenIs(builder_, IDENTIFIER)) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = consumeToken(builder_, IDENTIFIER);
+    result_ = CustomType(builder_, level_ + 1);
     exit_section_(builder_, marker_, SERVICE_SUPER_NAME, result_);
     return result_;
   }
 
   /* ********************************************************** */
-  // 'set' CppType? '<' FieldType '>'
+  // 'set' CppType? GenericType
   public static boolean SetType(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "SetType")) return false;
     boolean result_;
@@ -859,9 +908,7 @@ public class ThriftParser implements PsiParser {
     result_ = consumeToken(builder_, "set");
     pinned_ = result_; // pin = 1
     result_ = result_ && report_error_(builder_, SetType_1(builder_, level_ + 1));
-    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, LT)) && result_;
-    result_ = pinned_ && report_error_(builder_, FieldType(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && consumeToken(builder_, GT) && result_;
+    result_ = pinned_ && GenericType(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, SET_TYPE, result_, pinned_, null);
     return result_ || pinned_;
   }
@@ -871,6 +918,38 @@ public class ThriftParser implements PsiParser {
     if (!recursion_guard_(builder_, level_, "SetType_1")) return false;
     CppType(builder_, level_ + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // 'bool' | 'byte' | 'i16' | 'i32' | 'i64' | 'double' | 'string' | 'binary' | 'slist'
+  public static boolean SimpleBaseType(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "SimpleBaseType")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<simple base type>");
+    result_ = consumeToken(builder_, "bool");
+    if (!result_) result_ = consumeToken(builder_, "byte");
+    if (!result_) result_ = consumeToken(builder_, "i16");
+    if (!result_) result_ = consumeToken(builder_, "i32");
+    if (!result_) result_ = consumeToken(builder_, "i64");
+    if (!result_) result_ = consumeToken(builder_, "double");
+    if (!result_) result_ = consumeToken(builder_, "string");
+    if (!result_) result_ = consumeToken(builder_, "binary");
+    if (!result_) result_ = consumeToken(builder_, "slist");
+    exit_section_(builder_, level_, marker_, SIMPLE_BASE_TYPE, result_, false, null);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // MapType | SetType | ListType
+  static boolean SimpleContainerType(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "SimpleContainerType")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = MapType(builder_, level_ + 1);
+    if (!result_) result_ = SetType(builder_, level_ + 1);
+    if (!result_) result_ = ListType(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
   }
 
   /* ********************************************************** */
