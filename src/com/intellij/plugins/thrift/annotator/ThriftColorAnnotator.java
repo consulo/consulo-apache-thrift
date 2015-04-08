@@ -12,6 +12,8 @@ import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
 import com.intellij.plugins.thrift.lang.psi.ThriftService;
 import com.intellij.plugins.thrift.lang.psi.ThriftStruct;
+import com.intellij.plugins.thrift.lang.psi.ThriftTypedef;
+import com.intellij.plugins.thrift.lang.psi.ThriftUnion;
 import com.intellij.plugins.thrift.lang.psi.ThriftVisitor;
 import com.intellij.plugins.thrift.util.ThriftUtils;
 import com.intellij.psi.PsiElement;
@@ -49,6 +51,18 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 	public void visitStruct(@NotNull ThriftStruct o)
 	{
 		highlightName(o.getDefinitionName(), DefaultLanguageHighlighterColors.CLASS_NAME);
+	}
+
+	@Override
+	public void visitUnion(@NotNull ThriftUnion o)
+	{
+		highlightName(o.getDefinitionName(), DefaultLanguageHighlighterColors.CLASS_NAME);
+	}
+
+	@Override
+	public void visitTypedef(@NotNull ThriftTypedef o)
+	{
+		highlightName(o.getDefinitionName(), DefaultLanguageHighlighterColors.TYPE_ALIAS_NAME);
 	}
 
 	@Override
