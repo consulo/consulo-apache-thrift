@@ -88,6 +88,12 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 	}
 
 	@Override
+	public void visitEnum(@NotNull ThriftEnum o)
+	{
+		highlightName(o, o.getDefinitionName());
+	}
+
+	@Override
 	public void visitException(@NotNull ThriftException o)
 	{
 		highlightName(o, o.getDefinitionName());
@@ -99,16 +105,38 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 		highlightName(o, o.getDefinitionName());
 	}
 
+	@Override
+	public void visitConst(@NotNull ThriftConst o)
+	{
+		highlightName(o, o.getDefinitionName());
+	}
+
+	@Override
+	public void visitEnumField(@NotNull ThriftEnumField o)
+	{
+		highlightName(o, o.getDefinitionName());
+	}
+
+	@Override
+	public void visitSenum(@NotNull ThriftSenum o)
+	{
+		highlightName(o, o.getDefinitionName());
+	}
+
 	private static TextAttributesKey getAttributesKey(PsiElement element)
 	{
 		if(element instanceof ThriftService || element instanceof ThriftUnion || element instanceof ThriftStruct || element instanceof
-				ThriftException)
+				ThriftException || element instanceof ThriftEnum || element instanceof ThriftSenum)
 		{
 			return DefaultLanguageHighlighterColors.CLASS_NAME;
 		}
 		else if(element instanceof ThriftTypedef)
 		{
 			return DefaultLanguageHighlighterColors.TYPE_ALIAS_NAME;
+		}
+		else if(element instanceof ThriftConst || element instanceof ThriftEnumField)
+		{
+			return DefaultLanguageHighlighterColors.STATIC_FIELD;
 		}
 		else if(element instanceof ThriftField)
 		{

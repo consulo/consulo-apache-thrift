@@ -170,7 +170,7 @@ public class ThriftVisitor extends PsiElementVisitor {
   }
 
   public void visitEnumField(@NotNull ThriftEnumField o) {
-    visitPsiCompositeElement(o);
+    visitTopLevelDeclaration(o);
   }
 
   public void visitEnumFields(@NotNull ThriftEnumFields o) {

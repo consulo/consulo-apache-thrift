@@ -1,11 +1,13 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.plugins.thrift.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public interface ThriftEnumField extends ThriftPsiCompositeElement {
+public interface ThriftEnumField extends ThriftTopLevelDeclaration {
+
+  @NotNull
+  ThriftDefinitionName getDefinitionName();
 
   @Nullable
   ThriftIntConstant getIntConstant();
@@ -15,8 +17,5 @@ public interface ThriftEnumField extends ThriftPsiCompositeElement {
 
   @Nullable
   ThriftTypeAnnotations getTypeAnnotations();
-
-  @NotNull
-  PsiElement getIdentifier();
 
 }

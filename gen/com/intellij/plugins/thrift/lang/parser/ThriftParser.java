@@ -1194,12 +1194,12 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // Identifier ('=' IntConstant)? TypeAnnotations? ListSeparator?
+  // DefinitionName ('=' IntConstant)? TypeAnnotations? ListSeparator?
   public static boolean enumField(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumField")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, "<enum field>");
-    result_ = consumeToken(builder_, IDENTIFIER);
+    result_ = DefinitionName(builder_, level_ + 1);
     result_ = result_ && enumField_1(builder_, level_ + 1);
     result_ = result_ && enumField_2(builder_, level_ + 1);
     result_ = result_ && enumField_3(builder_, level_ + 1);
@@ -1240,7 +1240,7 @@ public class ThriftParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // !('}' | Identifier)
+  // !('}' | DefinitionName)
   static boolean enumFieldRecovery(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumFieldRecovery")) return false;
     boolean result_;
@@ -1250,13 +1250,13 @@ public class ThriftParser implements PsiParser {
     return result_;
   }
 
-  // '}' | Identifier
+  // '}' | DefinitionName
   private static boolean enumFieldRecovery_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumFieldRecovery_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, RIGHTCURLYBRACE);
-    if (!result_) result_ = consumeToken(builder_, IDENTIFIER);
+    if (!result_) result_ = DefinitionName(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }

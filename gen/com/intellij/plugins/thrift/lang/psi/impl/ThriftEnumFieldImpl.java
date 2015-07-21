@@ -1,17 +1,18 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.plugins.thrift.lang.psi.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
+import com.intellij.plugins.thrift.lang.psi.ThriftEnumField;
+import com.intellij.plugins.thrift.lang.psi.ThriftIntConstant;
+import com.intellij.plugins.thrift.lang.psi.ThriftListSeparator;
+import com.intellij.plugins.thrift.lang.psi.ThriftTypeAnnotations;
+import com.intellij.plugins.thrift.lang.psi.ThriftVisitor;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
-import com.intellij.plugins.thrift.lang.psi.*;
-import com.intellij.plugins.thrift.util.ThriftPsiUtil;
 
-public class ThriftEnumFieldImpl extends ThriftPsiCompositeElementImpl implements ThriftEnumField {
+public class ThriftEnumFieldImpl extends ThriftTopLevelDeclarationImpl implements ThriftEnumField {
 
   public ThriftEnumFieldImpl(ASTNode node) {
     super(node);
@@ -20,6 +21,12 @@ public class ThriftEnumFieldImpl extends ThriftPsiCompositeElementImpl implement
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof ThriftVisitor) ((ThriftVisitor)visitor).visitEnumField(this);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public ThriftDefinitionName getDefinitionName() {
+    return findNotNullChildByClass(ThriftDefinitionName.class);
   }
 
   @Override
@@ -38,12 +45,6 @@ public class ThriftEnumFieldImpl extends ThriftPsiCompositeElementImpl implement
   @Nullable
   public ThriftTypeAnnotations getTypeAnnotations() {
     return findChildByClass(ThriftTypeAnnotations.class);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getIdentifier() {
-    return findNotNullChildByType(IDENTIFIER);
   }
 
 }

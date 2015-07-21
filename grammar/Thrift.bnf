@@ -84,8 +84,14 @@ Enum            ::=  'enum' DefinitionName '{' enumFields '}' TypeAnnotations?
 {pin=1 mixin="com.intellij.plugins.thrift.lang.psi.impl.ThriftTopLevelDeclarationImpl" implements="com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration"}
 enumFields ::= enumField*
 {implements="com.intellij.plugins.thrift.lang.psi.ThriftDeclarationBody"}
-enumField ::= Identifier ('=' IntConstant)? TypeAnnotations? ListSeparator? {recoverWhile=enumFieldRecovery}
-private enumFieldRecovery ::= !('}' | Identifier)
+
+enumField ::= DefinitionName ('=' IntConstant)? TypeAnnotations? ListSeparator? {
+	recoverWhile=enumFieldRecovery
+	mixin="com.intellij.plugins.thrift.lang.psi.impl.ThriftTopLevelDeclarationImpl"
+	implements="com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration"
+}
+
+private enumFieldRecovery ::= !('}' | DefinitionName)
 
 Senum           ::=  'senum' DefinitionName '{' senumBody '}' TypeAnnotations?
 {pin=1 mixin="com.intellij.plugins.thrift.lang.psi.impl.ThriftTopLevelDeclarationImpl" implements="com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration"}
