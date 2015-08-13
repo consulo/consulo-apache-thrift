@@ -1,8 +1,8 @@
 package org.mustbe.consulo.apache.thrift.vfs.backgroundTask;
 
-import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
-import org.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
 import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.vfs.backgroundTask.BackgroundTaskByVfsChangeProvider;
+import org.mustbe.consulo.vfs.backgroundTask.BackgroundTaskByVfsParameters;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
