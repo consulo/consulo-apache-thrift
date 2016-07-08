@@ -1,7 +1,7 @@
 package com.intellij.plugins.thrift;
 
 
-import org.consulo.lombok.annotations.Bundle;
+import consulo.lombok.annotations.Bundle;
 
 /**
  * Created by fkorotkov.
