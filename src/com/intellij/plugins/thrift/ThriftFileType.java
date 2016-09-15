@@ -5,7 +5,7 @@ import javax.swing.Icon;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.apache.thrift.ThriftIcons;
+import consulo.apache.thrift.ThriftIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 
 /**

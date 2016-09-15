@@ -2,8 +2,6 @@ package com.intellij.plugins.thrift;
 
 import org.jetbrains.annotations.NotNull;
 import com.intellij.icons.AllIcons;
-import com.intellij.ide.IconDescriptor;
-import com.intellij.ide.IconDescriptorUpdater;
 import com.intellij.plugins.thrift.lang.psi.ThriftConst;
 import com.intellij.plugins.thrift.lang.psi.ThriftEnum;
 import com.intellij.plugins.thrift.lang.psi.ThriftException;
@@ -14,6 +12,8 @@ import com.intellij.plugins.thrift.lang.psi.ThriftStruct;
 import com.intellij.plugins.thrift.lang.psi.ThriftTypedef;
 import com.intellij.plugins.thrift.lang.psi.ThriftUnion;
 import com.intellij.psi.PsiElement;
+import consulo.ide.IconDescriptor;
+import consulo.ide.IconDescriptorUpdater;
 
 public class ThriftIconProvider implements IconDescriptorUpdater
 {

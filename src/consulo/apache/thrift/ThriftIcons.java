@@ -1,4 +1,4 @@
-package org.mustbe.consulo.apache.thrift;
+package consulo.apache.thrift;
 
 import javax.swing.Icon;
 

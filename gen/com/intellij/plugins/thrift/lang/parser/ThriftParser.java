@@ -1,16 +1,16 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.plugins.thrift.lang.parser;
 
+import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
+
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import com.intellij.lang.LanguageVersion;
-import com.intellij.openapi.diagnostic.Logger;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.lang.PsiParser;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.psi.tree.IElementType;
+import consulo.lang.LanguageVersion;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class ThriftParser implements PsiParser {
