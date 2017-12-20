@@ -22,10 +22,4 @@ public class ThriftPrefixReference extends PsiReferenceBase<ThriftCustomType> {
     ThriftInclude include = ThriftPsiUtil.findImportByPrefix(getElement().getContainingFile(), fileName);
     return ThriftPsiUtil.resolveInclude(include);
   }
-
-  @NotNull
-  @Override
-  public Object[] getVariants() {
-    return PsiElement.EMPTY_ARRAY;
-  }
 }

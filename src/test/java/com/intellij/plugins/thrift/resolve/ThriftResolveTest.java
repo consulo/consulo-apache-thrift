@@ -1,13 +1,13 @@
 package com.intellij.plugins.thrift.resolve;
 
-import com.intellij.codeInsight.TargetElementUtilBase;
+import java.util.Collection;
+
 import com.intellij.plugins.thrift.ThriftCodeInsightFixtureTestCase;
 import com.intellij.plugins.thrift.ThriftFileType;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
-
-import java.util.Collection;
+import consulo.codeInsight.TargetElementUtil;
 
 /**
  * Created by fkorotkov.
@@ -23,7 +23,7 @@ public class ThriftResolveTest extends ThriftCodeInsightFixtureTestCase {
     assertNotNull(file);
     PsiReference reference = file.findReferenceAt(myFixture.getCaretOffset());
     assertNotNull("no reference", reference);
-    final Collection<PsiElement> elements = TargetElementUtilBase.getInstance().getTargetCandidates(reference);
+    final Collection<PsiElement> elements = TargetElementUtil.getTargetCandidates(reference);
     assertNotNull(elements);
     assertEquals(expectedSize, elements.size());
     return elements;

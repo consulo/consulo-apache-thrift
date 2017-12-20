@@ -1,15 +1,16 @@
 package com.intellij.plugins.thrift.usages;
 
+import java.util.Collection;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.editor.ex.EditorEx;
+import com.intellij.openapi.util.Key;
 import com.intellij.plugins.thrift.ThriftCodeInsightFixtureTestCase;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.usages.PsiElementUsageTarget;
 import com.intellij.usages.UsageTarget;
 import com.intellij.usages.UsageTargetUtil;
-import org.jetbrains.annotations.NonNls;
-
-import java.util.Collection;
 
 public class ThriftFindUsagesTest extends ThriftCodeInsightFixtureTestCase {
   @Override
@@ -28,7 +29,7 @@ public class ThriftFindUsagesTest extends ThriftCodeInsightFixtureTestCase {
   private Collection<UsageInfo> findUsages() throws Throwable {
     final UsageTarget[] targets = UsageTargetUtil.findUsageTargets(new DataProvider() {
       @Override
-      public Object getData(@NonNls String dataId) {
+      public Object getData(@NotNull Key<?> dataId) {
         return ((EditorEx)myFixture.getEditor()).getDataContext().getData(dataId);
       }
     });

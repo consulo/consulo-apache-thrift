@@ -17,24 +17,29 @@ package com.intellij.plugins.thrift.lang.parser;
 
 import com.intellij.plugins.thrift.ThriftFileType;
 import com.intellij.plugins.thrift.util.ThriftTestUtils;
-import com.intellij.testFramework.ParsingTestCase;
+import consulo.testFramework.ParsingTestCase;
 
-public class ThriftParserTest extends ParsingTestCase {
-  public ThriftParserTest() {
-    super("parser", ThriftFileType.DEFAULT_EXTENSION, new ThriftParserDefinition());
-  }
+public class ThriftParserTest extends ParsingTestCase
+{
+	public ThriftParserTest()
+	{
+		super("parser", ThriftFileType.DEFAULT_EXTENSION);
+	}
 
-  @Override
-  protected String getTestDataPath() {
-    return ThriftTestUtils.BASE_TEST_DATA_PATH;
-  }
+	@Override
+	protected String getTestDataPath()
+	{
+		return ThriftTestUtils.BASE_TEST_DATA_PATH;
+	}
 
-  @Override
-  protected boolean skipSpaces() {
-    return true;
-  }
+	@Override
+	protected boolean skipSpaces()
+	{
+		return true;
+	}
 
-  public void testThrift() {
-    doTest(true);
-  }
+	public void testThrift()
+	{
+		doTest(true);
+	}
 }
