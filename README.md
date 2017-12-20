@@ -1,1 +1,1 @@
-[![Build Status](http://must-be.org/jenkins/job/consulo-apache-thrift/badge/icon)](http://must-be.org/jenkins/job/consulo-apache-thrift/)
+[![Build Status](https://ci.consulo.io/job/consulo-apache-thrift/badge/icon)](https://ci.consulo.io/job/consulo-apache-thrift/)
