@@ -7,6 +7,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.ItemPresentationProvider;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 
 /**
@@ -31,7 +32,7 @@ public class ThriftTopLevelDeclarationPresentationProvider implements ItemPresen
       @Nullable
       @Override
       public Icon getIcon(boolean unused) {
-        return IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY);
+        return TargetAWT.to(IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY));
       }
     };
   }
