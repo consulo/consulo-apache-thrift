@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import consulo.apache.thrift.ThriftIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.ui.image.Image;
 
 /**
  * Created by fkorotkov.
@@ -46,7 +47,7 @@ public class ThriftFileType extends LanguageFileType
 
 	@Nullable
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return ThriftIcons.FileTypes.ApacheThrift;
 	}
