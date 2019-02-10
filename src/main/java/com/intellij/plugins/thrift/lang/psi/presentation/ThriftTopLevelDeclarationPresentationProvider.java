@@ -1,14 +1,13 @@
 package com.intellij.plugins.thrift.lang.psi.presentation;
 
-import javax.swing.Icon;
-
 import javax.annotation.Nullable;
+
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.ItemPresentationProvider;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 /**
  * Created by fkorotkov.
@@ -31,8 +30,8 @@ public class ThriftTopLevelDeclarationPresentationProvider implements ItemPresen
 
       @Nullable
       @Override
-      public Icon getIcon(boolean unused) {
-        return TargetAWT.to(IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY));
+      public Image getIcon() {
+        return IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY);
       }
     };
   }

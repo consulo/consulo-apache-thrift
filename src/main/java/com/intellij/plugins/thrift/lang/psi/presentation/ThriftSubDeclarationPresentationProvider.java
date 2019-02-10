@@ -1,16 +1,15 @@
 package com.intellij.plugins.thrift.lang.psi.presentation;
 
-import javax.swing.Icon;
-
 import javax.annotation.Nullable;
+
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.ItemPresentationProvider;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.plugins.thrift.lang.psi.ThriftSubDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration;
 import com.intellij.psi.util.PsiTreeUtil;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 public class ThriftSubDeclarationPresentationProvider implements ItemPresentationProvider<ThriftSubDeclaration>
 {
@@ -36,9 +35,9 @@ public class ThriftSubDeclarationPresentationProvider implements ItemPresentatio
 
 			@Nullable
 			@Override
-			public Icon getIcon(boolean unused)
+			public Image getIcon()
 			{
-				return TargetAWT.to(IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY));
+				return IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY);
 			}
 		};
 	}
