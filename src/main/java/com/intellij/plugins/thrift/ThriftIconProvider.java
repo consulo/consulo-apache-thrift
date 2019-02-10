@@ -1,6 +1,7 @@
 package com.intellij.plugins.thrift;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.icons.AllIcons;
 import com.intellij.plugins.thrift.lang.psi.ThriftConst;
 import com.intellij.plugins.thrift.lang.psi.ThriftEnum;
@@ -18,7 +19,7 @@ import consulo.ide.IconDescriptorUpdater;
 public class ThriftIconProvider implements IconDescriptorUpdater
 {
 	@Override
-	public void updateIcon(@NotNull IconDescriptor iconDescriptor, @NotNull PsiElement element, int i)
+	public void updateIcon(@Nonnull IconDescriptor iconDescriptor, @Nonnull PsiElement element, int i)
 	{
 		if(element instanceof ThriftConst)
 		{

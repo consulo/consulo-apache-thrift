@@ -1,10 +1,10 @@
 package com.intellij.plugins.thrift;
 
-import javax.swing.Icon;
+import javax.annotation.Nonnull;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import consulo.apache.thrift.ThriftIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import consulo.ui.image.Image;
@@ -24,21 +24,21 @@ public class ThriftFileType extends LanguageFileType
 		super(ThriftLanguage.INSTANCE);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getName()
 	{
 		return ThriftBundle.message("thrift.name");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getDescription()
 	{
 		return ThriftBundle.message("thrift.description");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getDefaultExtension()
 	{

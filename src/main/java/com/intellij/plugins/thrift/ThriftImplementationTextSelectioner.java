@@ -4,11 +4,11 @@ import com.intellij.codeInsight.hint.ImplementationTextSelectioner;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ThriftImplementationTextSelectioner implements ImplementationTextSelectioner {
   @Override
-  public int getTextStartOffset(@NotNull PsiElement element) {
+  public int getTextStartOffset(@Nonnull PsiElement element) {
     if (element instanceof ThriftDefinitionName) {
       element = element.getParent();
     }
@@ -18,7 +18,7 @@ public class ThriftImplementationTextSelectioner implements ImplementationTextSe
   }
 
   @Override
-  public int getTextEndOffset(@NotNull PsiElement element) {
+  public int getTextEndOffset(@Nonnull PsiElement element) {
     if (element instanceof ThriftDefinitionName) {
       element = element.getParent();
     }

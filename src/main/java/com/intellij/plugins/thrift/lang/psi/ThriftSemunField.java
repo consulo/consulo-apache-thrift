@@ -1,8 +1,9 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.plugins.thrift.lang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.psi.PsiElement;
 
 public interface ThriftSemunField extends ThriftPsiCompositeElement {
@@ -10,7 +11,7 @@ public interface ThriftSemunField extends ThriftPsiCompositeElement {
   @Nullable
   ThriftListSeparator getListSeparator();
 
-  @NotNull
+  @Nonnull
   PsiElement getLiteral();
 
 }

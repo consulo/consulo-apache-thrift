@@ -4,14 +4,14 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.plugins.thrift.util.ThriftPsiUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReferenceBase;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by fkorotkov.
  */
 public class ThriftPrefixReference extends PsiReferenceBase<ThriftCustomType> {
-  public ThriftPrefixReference(@NotNull ThriftCustomType element, int offset) {
+  public ThriftPrefixReference(@Nonnull ThriftCustomType element, int offset) {
     super(element, TextRange.create(0, offset));
   }
 

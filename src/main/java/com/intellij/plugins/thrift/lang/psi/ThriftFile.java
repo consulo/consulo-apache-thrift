@@ -15,19 +15,20 @@
  */
 package com.intellij.plugins.thrift.lang.psi;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.plugins.thrift.ThriftFileType;
 import com.intellij.plugins.thrift.ThriftLanguage;
 import com.intellij.psi.FileViewProvider;
-import org.jetbrains.annotations.NotNull;
 
 public class ThriftFile extends PsiFileBase {
-  public ThriftFile(@NotNull FileViewProvider viewProvider) {
+  public ThriftFile(@Nonnull FileViewProvider viewProvider) {
     super(viewProvider, ThriftLanguage.INSTANCE);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public FileType getFileType() {
     return ThriftFileType.INSTANCE;

@@ -15,8 +15,9 @@
  */
 package com.intellij.plugins.thrift.structure;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.structureView.StructureViewModel;
@@ -38,7 +39,7 @@ import com.intellij.psi.PsiFile;
  */
 public class ThriftStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider
 {
-	public ThriftStructureViewModel(@NotNull PsiFile psiFile)
+	public ThriftStructureViewModel(@Nonnull PsiFile psiFile)
 	{
 		super(psiFile, new ThriftStructureViewElement(psiFile));
 		withSorters(Sorter.ALPHA_SORTER);
@@ -51,7 +52,7 @@ public class ThriftStructureViewModel extends StructureViewModelBase implements 
 		return false;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Filter[] getFilters()
 	{
@@ -96,14 +97,14 @@ public class ThriftStructureViewModel extends StructureViewModelBase implements 
 		}
 
 		@Override
-		@NotNull
+		@Nonnull
 		public ActionPresentation getPresentation()
 		{
 			return new ActionPresentationData(IdeBundle.message("action.structureview.show.fields"), null, AllIcons.Nodes.Field);
 		}
 
 		@Override
-		@NotNull
+		@Nonnull
 		public String getName()
 		{
 			return ID;

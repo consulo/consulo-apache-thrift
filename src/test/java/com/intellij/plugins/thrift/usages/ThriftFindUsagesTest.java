@@ -2,7 +2,8 @@ package com.intellij.plugins.thrift.usages;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.util.Key;
@@ -29,7 +30,7 @@ public class ThriftFindUsagesTest extends ThriftCodeInsightFixtureTestCase {
   private Collection<UsageInfo> findUsages() throws Throwable {
     final UsageTarget[] targets = UsageTargetUtil.findUsageTargets(new DataProvider() {
       @Override
-      public Object getData(@NotNull Key<?> dataId) {
+      public Object getData(@Nonnull Key<?> dataId) {
         return ((EditorEx)myFixture.getEditor()).getDataContext().getData(dataId);
       }
     });

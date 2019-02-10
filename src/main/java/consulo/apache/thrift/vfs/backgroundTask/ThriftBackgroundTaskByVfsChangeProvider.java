@@ -1,6 +1,7 @@
 package consulo.apache.thrift.vfs.backgroundTask;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -20,7 +21,7 @@ public class ThriftBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfs
 	}
 
 	@Override
-	public void setDefaultParameters(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull BackgroundTaskByVfsParameters parameters)
+	public void setDefaultParameters(@Nonnull Project project, @Nonnull VirtualFile virtualFile, @Nonnull BackgroundTaskByVfsParameters parameters)
 	{
 		if(SystemInfo.isWindows)
 		{
@@ -36,7 +37,7 @@ public class ThriftBackgroundTaskByVfsChangeProvider extends BackgroundTaskByVfs
 		parameters.setOutPath("$FileParentPath$");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getTemplateName()
 	{

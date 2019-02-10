@@ -5,13 +5,13 @@ import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclarationBody;
 import com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration;
 import com.intellij.psi.util.PsiTreeUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collections;
 import java.util.List;
 
 public class ThriftTopLevelDeclarationImpl extends AbstractThriftDeclaration implements ThriftTopLevelDeclaration {
-  public ThriftTopLevelDeclarationImpl(@NotNull ASTNode node) {
+  public ThriftTopLevelDeclarationImpl(@Nonnull ASTNode node) {
     super(node);
   }
 

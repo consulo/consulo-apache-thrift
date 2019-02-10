@@ -5,8 +5,8 @@ import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by fkorotkov.
@@ -26,7 +26,7 @@ public class ThriftBraceMatcher implements PairedBraceMatcher {
   }
 
   @Override
-  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
+  public boolean isPairedBracesAllowedBeforeType(@Nonnull IElementType lbraceType, @Nullable IElementType contextType) {
     return true;
   }
 

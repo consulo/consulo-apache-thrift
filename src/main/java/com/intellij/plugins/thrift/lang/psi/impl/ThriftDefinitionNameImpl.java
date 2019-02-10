@@ -1,13 +1,16 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.plugins.thrift.lang.psi.impl;
 
-import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
+
 import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.plugins.thrift.lang.psi.*;
 import com.intellij.plugins.thrift.util.ThriftPsiUtil;
 
@@ -17,18 +20,18 @@ public class ThriftDefinitionNameImpl extends ThriftPsiCompositeElementImpl impl
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ThriftVisitor) ((ThriftVisitor)visitor).visitDefinitionName(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public PsiElement getIdentifier() {
     return findNotNullChildByType(IDENTIFIER);
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement setName(String name) {
     return ThriftPsiUtil.setName(this, name);
   }
@@ -39,7 +42,7 @@ public class ThriftDefinitionNameImpl extends ThriftPsiCompositeElementImpl impl
     return ThriftPsiUtil.getName(this);
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement getNameIdentifier() {
     return ThriftPsiUtil.getNameIdentifier(this);
   }

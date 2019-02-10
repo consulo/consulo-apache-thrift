@@ -2,18 +2,19 @@
 package com.intellij.plugins.thrift.lang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface ThriftFunction extends ThriftSubDeclaration {
 
-  @NotNull
+  @Nonnull
   ThriftDefinitionName getDefinitionName();
 
-  @NotNull
+  @Nonnull
   List<ThriftField> getFieldList();
 
-  @NotNull
+  @Nonnull
   ThriftFunctionType getFunctionType();
 
   @Nullable

@@ -7,8 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.plugins.thrift.ThriftFileType;
@@ -42,13 +43,13 @@ public class ThriftSubDeclarationIndex extends FileBasedIndexExtension<String, S
   };
   private static final ThriftSubDeclarationIndex.MyIndexer myIndexer = new MyIndexer();
 
-  @NotNull
+  @Nonnull
   @Override
   public ID<String, String> getName() {
     return THRIFT_DECLARATION_INDEX;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public DataIndexer<String, String, FileContent> getIndexer() {
     return myIndexer;
@@ -97,9 +98,9 @@ public class ThriftSubDeclarationIndex extends FileBasedIndexExtension<String, S
   }
 
   public static List<ThriftDeclaration> findDeclaration(@Nullable final String className,
-                                                        @NotNull final String name,
-                                                        @NotNull Project project,
-                                                        @NotNull GlobalSearchScope scope) {
+                                                        @Nonnull final String name,
+                                                        @Nonnull Project project,
+                                                        @Nonnull GlobalSearchScope scope) {
     final List<ThriftDeclaration> result = new ArrayList<ThriftDeclaration>();
     final PsiManager manager = PsiManager.getInstance(project);
     FileBasedIndex.getInstance().getFilesWithKey(
@@ -134,7 +135,7 @@ public class ThriftSubDeclarationIndex extends FileBasedIndexExtension<String, S
   }
 
   private static class MyIndexer implements DataIndexer<String, String, FileContent> {
-    @NotNull
+    @Nonnull
     @Override
     public Map<String, String> map(FileContent inputData) {
       Map<String, String> result = new THashMap<String, String>();

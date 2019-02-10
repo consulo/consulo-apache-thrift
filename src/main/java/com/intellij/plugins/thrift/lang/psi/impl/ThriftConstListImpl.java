@@ -2,14 +2,14 @@
 package com.intellij.plugins.thrift.lang.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
+
+import javax.annotation.Nonnull;
+
 import com.intellij.plugins.thrift.lang.psi.*;
-import com.intellij.plugins.thrift.util.ThriftPsiUtil;
 
 public class ThriftConstListImpl extends ThriftPsiCompositeElementImpl implements ThriftConstList {
 
@@ -17,19 +17,19 @@ public class ThriftConstListImpl extends ThriftPsiCompositeElementImpl implement
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ThriftVisitor) ((ThriftVisitor)visitor).visitConstList(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ThriftConstValue> getConstValueList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ThriftConstValue.class);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ThriftListSeparator> getListSeparatorList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ThriftListSeparator.class);
   }

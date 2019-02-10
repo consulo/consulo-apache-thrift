@@ -1,8 +1,8 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.plugins.thrift.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
 import com.intellij.plugins.thrift.lang.psi.ThriftEnumField;
@@ -18,13 +18,13 @@ public class ThriftEnumFieldImpl extends ThriftTopLevelDeclarationImpl implement
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ThriftVisitor) ((ThriftVisitor)visitor).visitEnumField(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public ThriftDefinitionName getDefinitionName() {
     return findNotNullChildByClass(ThriftDefinitionName.class);
   }

@@ -4,7 +4,8 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
@@ -31,7 +32,7 @@ public class ThriftKeywordCompletionContributor extends CompletionContributor
 		extend(CompletionType.BASIC, psiElement().andOr(psiElement(ThriftTokenTypes.IDENTIFIER), psiElement(ThriftTokenTypes.STIDENTIFIER)), new CompletionProvider()
 		{
 			@Override
-			public void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result)
+			public void addCompletions(@Nonnull CompletionParameters parameters, ProcessingContext context, @Nonnull CompletionResultSet result)
 			{
 				final Collection<String> suggestedKeywords = suggestKeywords(parameters.getPosition());
 				suggestedKeywords.retainAll(ThriftUtils.getKeywords());
@@ -43,7 +44,7 @@ public class ThriftKeywordCompletionContributor extends CompletionContributor
 		});
 	}
 
-	private Collection<String> suggestKeywords(@NotNull PsiElement position)
+	private Collection<String> suggestKeywords(@Nonnull PsiElement position)
 	{
 		PsiFile psiFile = position.getContainingFile();
 		PsiElement topLevelElement = position;

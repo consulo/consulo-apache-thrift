@@ -7,7 +7,7 @@ import com.intellij.plugins.thrift.index.ThriftDeclarationIndex;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ArrayUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import java.util.List;
  * Created by fkorotkov.
  */
 public class ThriftClassContributor implements ChooseByNameContributor {
-  @NotNull
+  @Nonnull
   @Override
   public String[] getNames(Project project, boolean includeNonProjectItems) {
     return ArrayUtil.toStringArray(ThriftDeclarationIndex.findAllKeys(project, getScope(project, includeNonProjectItems)));
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
     List<ThriftDeclaration> declarations = ThriftDeclarationIndex.findDeclaration(name, project, getScope(project, includeNonProjectItems));

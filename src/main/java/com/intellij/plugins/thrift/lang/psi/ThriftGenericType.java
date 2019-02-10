@@ -2,12 +2,12 @@
 package com.intellij.plugins.thrift.lang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+
+import javax.annotation.Nonnull;
 
 public interface ThriftGenericType extends ThriftPsiCompositeElement {
 
-  @NotNull
+  @Nonnull
   List<ThriftFieldType> getFieldTypeList();
 
 }

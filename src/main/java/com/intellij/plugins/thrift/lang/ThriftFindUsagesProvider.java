@@ -1,12 +1,14 @@
 package com.intellij.plugins.thrift.lang;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class ThriftFindUsagesProvider implements FindUsagesProvider {
   @Nullable
@@ -16,31 +18,31 @@ public class ThriftFindUsagesProvider implements FindUsagesProvider {
   }
 
   @Override
-  public boolean canFindUsagesFor(@NotNull PsiElement psiElement) {
+  public boolean canFindUsagesFor(@Nonnull PsiElement psiElement) {
     return psiElement instanceof ThriftDefinitionName;
   }
 
   @Nullable
   @Override
-  public String getHelpId(@NotNull PsiElement psiElement) {
+  public String getHelpId(@Nonnull PsiElement psiElement) {
     return null;
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public String getType(@NotNull PsiElement element) {
+  public String getType(@Nonnull PsiElement element) {
     return "reference";
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public String getDescriptiveName(@NotNull PsiElement element) {
+  public String getDescriptiveName(@Nonnull PsiElement element) {
     return getNodeText(element, false);
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
+  public String getNodeText(@Nonnull PsiElement element, boolean useFullName) {
     String result = element instanceof ThriftDefinitionName ? ((ThriftDefinitionName)element).getName() : element.getText();
     return StringUtil.notNullize(result);
   }

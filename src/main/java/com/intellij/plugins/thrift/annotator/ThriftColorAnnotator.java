@@ -1,7 +1,7 @@
 package com.intellij.plugins.thrift.annotator;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
@@ -24,7 +24,7 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 	private AnnotationHolder myAnnotationHolder;
 
 	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
+	public void annotate(@Nonnull PsiElement element, @Nonnull AnnotationHolder holder)
 	{
 		myAnnotationHolder = holder;
 		element.accept(this);
@@ -44,7 +44,7 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 	}
 
 	@Override
-	public void visitCustomType(@NotNull ThriftCustomType o)
+	public void visitCustomType(@Nonnull ThriftCustomType o)
 	{
 		PsiElement identifier = o.getIdentifier();
 		for(PsiReference psiReference : o.getReferences())
@@ -64,61 +64,61 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 	}
 
 	@Override
-	public void visitStruct(@NotNull ThriftStruct o)
+	public void visitStruct(@Nonnull ThriftStruct o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitUnion(@NotNull ThriftUnion o)
+	public void visitUnion(@Nonnull ThriftUnion o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitTypedef(@NotNull ThriftTypedef o)
+	public void visitTypedef(@Nonnull ThriftTypedef o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitService(@NotNull ThriftService o)
+	public void visitService(@Nonnull ThriftService o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitEnum(@NotNull ThriftEnum o)
+	public void visitEnum(@Nonnull ThriftEnum o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitException(@NotNull ThriftException o)
+	public void visitException(@Nonnull ThriftException o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitField(@NotNull ThriftField o)
+	public void visitField(@Nonnull ThriftField o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitConst(@NotNull ThriftConst o)
+	public void visitConst(@Nonnull ThriftConst o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitEnumField(@NotNull ThriftEnumField o)
+	public void visitEnumField(@Nonnull ThriftEnumField o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
 
 	@Override
-	public void visitSenum(@NotNull ThriftSenum o)
+	public void visitSenum(@Nonnull ThriftSenum o)
 	{
 		highlightName(o, o.getDefinitionName());
 	}
@@ -149,7 +149,7 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 		return null;
 	}
 
-	private void highlightName(@NotNull PsiElement parent, @Nullable PsiElement target)
+	private void highlightName(@Nonnull PsiElement parent, @Nullable PsiElement target)
 	{
 		if(target == null)
 		{
@@ -170,7 +170,7 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 		annotation.setTextAttributes(attributesKey);
 	}
 
-	private void annotateKeyword(@NotNull PsiElement element)
+	private void annotateKeyword(@Nonnull PsiElement element)
 	{
 		final Annotation annotation = myAnnotationHolder.createInfoAnnotation(element, null);
 		annotation.setTextAttributes(TextAttributesKey.find(ThriftSyntaxHighlighterColors.THRIFT_KEYWORD));

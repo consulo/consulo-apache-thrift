@@ -3,8 +3,9 @@ package com.intellij.plugins.thrift.lang.psi;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
@@ -22,7 +23,7 @@ import com.intellij.util.Processor;
  * Created by fkorotkov.
  */
 public class ThriftTypeReference extends PsiReferenceBase<ThriftCustomType> {
-  public ThriftTypeReference(@NotNull ThriftCustomType element, int offset) {
+  public ThriftTypeReference(@Nonnull ThriftCustomType element, int offset) {
     super(element, TextRange.create(offset, element.getTextLength()));
   }
 
@@ -37,7 +38,7 @@ public class ThriftTypeReference extends PsiReferenceBase<ThriftCustomType> {
     });
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Object[] getVariants() {
     Object[] result = processComponentAndFile(new Function<Pair<String, PsiFile>, Object[]>() {
@@ -74,7 +75,7 @@ public class ThriftTypeReference extends PsiReferenceBase<ThriftCustomType> {
   }
 
   @Nullable
-  private <T> T processComponentAndFile(@NotNull Function<Pair<String, PsiFile>, T> fun) {
+  private <T> T processComponentAndFile(@Nonnull Function<Pair<String, PsiFile>, T> fun) {
     final String name = getElement().getText();
     int index = getRangeInElement().getStartOffset();
     if (index > 0) {

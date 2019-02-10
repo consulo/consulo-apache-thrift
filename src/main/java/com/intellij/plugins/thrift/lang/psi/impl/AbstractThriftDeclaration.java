@@ -10,14 +10,14 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by fkorotkov.
  */
 public class AbstractThriftDeclaration extends ThriftPsiCompositeElementImpl implements ThriftDeclaration {
-  public AbstractThriftDeclaration(@NotNull ASTNode node) {
+  public AbstractThriftDeclaration(@Nonnull ASTNode node) {
     super(node);
   }
 
@@ -33,7 +33,7 @@ public class AbstractThriftDeclaration extends ThriftPsiCompositeElementImpl imp
   }
 
   @Override
-  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+  public PsiElement setName(@NonNls @Nonnull String name) throws IncorrectOperationException {
     ThriftDefinitionName definitionName = getIdentifier();
     PsiElement id = definitionName != null ? definitionName.getFirstChild() : null;
     if (id instanceof LeafPsiElement) {
@@ -47,7 +47,7 @@ public class AbstractThriftDeclaration extends ThriftPsiCompositeElementImpl imp
     return ItemPresentationProviders.getItemPresentation(this);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public PsiElement getNavigationElement() {
     ThriftDefinitionName name = getIdentifier();

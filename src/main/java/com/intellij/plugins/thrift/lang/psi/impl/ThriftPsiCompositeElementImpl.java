@@ -19,10 +19,10 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.plugins.thrift.lang.psi.ThriftPsiCompositeElement;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ThriftPsiCompositeElementImpl extends ASTWrapperPsiElement implements ThriftPsiCompositeElement {
-  public ThriftPsiCompositeElementImpl(@NotNull ASTNode node) {
+  public ThriftPsiCompositeElementImpl(@Nonnull ASTNode node) {
     super(node);
   }
 

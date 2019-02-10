@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.plugins.thrift.ThriftFileType;
@@ -40,13 +41,13 @@ public class ThriftDeclarationIndex extends ScalarIndexExtension<String> {
   };
   private static final ThriftDeclarationIndex.MyIndexer myIndexer = new MyIndexer();
 
-  @NotNull
+  @Nonnull
   @Override
   public ID<String, Void> getName() {
     return THRIFT_DECLARATION_INDEX;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public DataIndexer<String, Void, FileContent> getIndexer() {
     return myIndexer;
@@ -89,9 +90,9 @@ public class ThriftDeclarationIndex extends ScalarIndexExtension<String> {
     return result;
   }
 
-  public static List<ThriftDeclaration> findDeclaration(@NotNull final String name,
-                                                        @NotNull Project project,
-                                                        @NotNull GlobalSearchScope scope) {
+  public static List<ThriftDeclaration> findDeclaration(@Nonnull final String name,
+                                                        @Nonnull Project project,
+                                                        @Nonnull GlobalSearchScope scope) {
     final List<ThriftDeclaration> result = new ArrayList<ThriftDeclaration>();
     final PsiManager manager = PsiManager.getInstance(project);
     FileBasedIndex.getInstance().getFilesWithKey(
@@ -117,7 +118,7 @@ public class ThriftDeclarationIndex extends ScalarIndexExtension<String> {
   }
 
   private static class MyIndexer implements DataIndexer<String, Void, FileContent> {
-    @NotNull
+    @Nonnull
     @Override
     public Map<String, Void> map(FileContent inputData) {
       Map<String, Void> result = new THashMap<String, Void>();

@@ -15,7 +15,8 @@
  */
 package com.intellij.plugins.thrift.lang.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
@@ -33,43 +34,43 @@ import consulo.lang.LanguageVersion;
 
 public class ThriftParserDefinition implements ParserDefinition {
   @Override
-  @NotNull
-  public Lexer createLexer(@NotNull LanguageVersion languageVersion) {
+  @Nonnull
+  public Lexer createLexer(@Nonnull LanguageVersion languageVersion) {
     return new _ThriftLexer();
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public PsiParser createParser(@NotNull LanguageVersion languageVersion) {
+  public PsiParser createParser(@Nonnull LanguageVersion languageVersion) {
     return new ThriftParser();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public IFileElementType getFileNodeType() {
     return ThriftTokenTypeSets.THRIFT_FILE;
   }
 
   @Override
-  @NotNull
-  public TokenSet getWhitespaceTokens(@NotNull LanguageVersion languageVersion) {
+  @Nonnull
+  public TokenSet getWhitespaceTokens(@Nonnull LanguageVersion languageVersion) {
     return ThriftTokenTypeSets.WHITESPACES;
   }
 
   @Override
-  @NotNull
-  public TokenSet getCommentTokens(@NotNull LanguageVersion languageVersion) {
+  @Nonnull
+  public TokenSet getCommentTokens(@Nonnull LanguageVersion languageVersion) {
     return ThriftTokenTypeSets.COMMENTS;
   }
 
   @Override
-  @NotNull
-  public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion) {
+  @Nonnull
+  public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion) {
     return ThriftTokenTypeSets.STRINGS;
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public PsiElement createElement(ASTNode node) {
     return ThriftTokenTypes.Factory.createElement(node);
   }
@@ -79,7 +80,7 @@ public class ThriftParserDefinition implements ParserDefinition {
     return new ThriftFile(viewProvider);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
     return SpaceRequirements.MAY;

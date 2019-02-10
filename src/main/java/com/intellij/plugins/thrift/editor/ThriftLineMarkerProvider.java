@@ -14,25 +14,26 @@ import com.intellij.plugins.thrift.util.ThriftPsiUtil;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.Function;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
 
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by fkorotkov.
  */
 public class ThriftLineMarkerProvider implements LineMarkerProvider {
   @Override
-  public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
+  public void collectSlowLineMarkers(@Nonnull List<PsiElement> elements, @Nonnull Collection<LineMarkerInfo> result) {
 
   }
 
   @Nullable
   @Override
-  public LineMarkerInfo getLineMarkerInfo(@NotNull PsiElement element) {
+  public LineMarkerInfo getLineMarkerInfo(@Nonnull PsiElement element) {
     if (element instanceof ThriftDefinitionName) {
       return findImplementationsAndCreateMarker((ThriftDefinitionName)element);
     }

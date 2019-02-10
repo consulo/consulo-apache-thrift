@@ -7,7 +7,7 @@ import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
@@ -47,13 +47,13 @@ public class ThriftSyntaxHighlighter extends SyntaxHighlighterBase {
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public Lexer getHighlightingLexer() {
     return new _ThriftLexer();
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     return pack(ATTRIBUTES.get(tokenType));
   }

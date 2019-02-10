@@ -3,9 +3,12 @@ package com.intellij.plugins.thrift.inspections;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import com.intellij.codeInspection.InspectionManager;
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.ProblemDescriptor;
@@ -21,13 +24,13 @@ import com.intellij.util.ArrayUtil;
 
 public class ThriftUnresolvedIncludeInspection extends LocalInspectionTool {
 
-  @NotNull
+  @Nonnull
   public String getGroupDisplayName() {
     return ThriftBundle.message("inspections.group.name");
   }
 
   @Nls
-  @NotNull
+  @Nonnull
   @Override
   public String getDisplayName() {
     return ThriftBundle.message("thrift.inspection.unresolved.include");
@@ -38,7 +41,7 @@ public class ThriftUnresolvedIncludeInspection extends LocalInspectionTool {
     return true;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getShortName() {
     return "ThriftUnresolvedInclude";
@@ -46,12 +49,12 @@ public class ThriftUnresolvedIncludeInspection extends LocalInspectionTool {
 
   @Nullable
   @Override
-  public ProblemDescriptor[] checkFile(@NotNull PsiFile file, @NotNull final InspectionManager manager, final boolean isOnTheFly) {
+  public ProblemDescriptor[] checkFile(@Nonnull PsiFile file, @Nonnull final InspectionManager manager, final boolean isOnTheFly) {
     final List<ProblemDescriptor> result = new ArrayList<ProblemDescriptor>();
     new ThriftVisitor() {
 
       @Override
-      public void visitInclude(@NotNull ThriftInclude include) {
+      public void visitInclude(@Nonnull ThriftInclude include) {
         if (ThriftPsiUtil.resolveInclude(include) == null) {
           PsiElement lastChild = include.getLastChild();
           result.add(manager.createProblemDescriptor(

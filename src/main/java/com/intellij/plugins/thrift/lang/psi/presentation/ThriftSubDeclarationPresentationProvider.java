@@ -2,7 +2,7 @@ package com.intellij.plugins.thrift.lang.psi.presentation;
 
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.ItemPresentationProvider;
 import com.intellij.openapi.util.Iconable;

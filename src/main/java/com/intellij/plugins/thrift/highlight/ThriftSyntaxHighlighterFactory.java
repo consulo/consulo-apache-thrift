@@ -4,13 +4,13 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by fkorotkov.
  */
 public class ThriftSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
-  @NotNull
+  @Nonnull
   @Override
   public SyntaxHighlighter getSyntaxHighlighter(Project project, VirtualFile virtualFile) {
     return new ThriftSyntaxHighlighter();
