@@ -1,4 +1,4 @@
-<idea-plugin>
+<consulo-plugin>
 	<id>com.intellij.plugins.thrift</id>
 	<name>Apache Thrift</name>
 	<description>Support for Thrift language</description>
@@ -53,4 +53,4 @@
 
 		<taskByVfsChange implementation="consulo.apache.thrift.vfs.backgroundTask.ThriftBackgroundTaskByVfsChangeProvider" />
 	</extensions>
-</idea-plugin>
+</consulo-plugin>
