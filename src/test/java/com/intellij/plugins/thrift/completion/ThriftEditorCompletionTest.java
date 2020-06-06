@@ -6,7 +6,7 @@ import com.intellij.plugins.thrift.ThriftFileType;
 /**
  * Created by fkorotkov.
  */
-public class ThriftEditorCompletionTest extends ThriftCodeInsightFixtureTestCase {
+public abstract class ThriftEditorCompletionTest extends ThriftCodeInsightFixtureTestCase {
   @Override
   protected String getBasePath() {
     return "completion/editor";

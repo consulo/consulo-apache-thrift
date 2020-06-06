@@ -3,7 +3,7 @@ package com.intellij.plugins.thrift.completion;
 /**
  * Created by fkorotkov.
  */
-public class ThriftKeywordCompletionTest extends ThriftCompletionTestBase {
+public abstract class ThriftKeywordCompletionTest extends ThriftCompletionTestBase {
   public ThriftKeywordCompletionTest() {
     super("completion/keyword");
   }

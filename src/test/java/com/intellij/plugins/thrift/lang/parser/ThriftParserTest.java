@@ -19,7 +19,7 @@ import com.intellij.plugins.thrift.ThriftFileType;
 import com.intellij.plugins.thrift.util.ThriftTestUtils;
 import consulo.testFramework.ParsingTestCase;
 
-public class ThriftParserTest extends ParsingTestCase
+public abstract class ThriftParserTest extends ParsingTestCase
 {
 	public ThriftParserTest()
 	{

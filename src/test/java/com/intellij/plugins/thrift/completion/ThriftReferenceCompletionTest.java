@@ -5,7 +5,7 @@ import com.intellij.plugins.thrift.ThriftFileType;
 /**
  * Created by fkorotkov.
  */
-public class ThriftReferenceCompletionTest extends ThriftCompletionTestBase {
+public abstract class ThriftReferenceCompletionTest extends ThriftCompletionTestBase {
   public ThriftReferenceCompletionTest() {
     super("completion/reference");
   }

@@ -1,7 +1,5 @@
 package com.intellij.plugins.thrift.resolve;
 
-import java.util.Collection;
-
 import com.intellij.plugins.thrift.ThriftCodeInsightFixtureTestCase;
 import com.intellij.plugins.thrift.ThriftFileType;
 import com.intellij.psi.PsiElement;
@@ -9,10 +7,12 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import consulo.codeInsight.TargetElementUtil;
 
+import java.util.Collection;
+
 /**
  * Created by fkorotkov.
  */
-public class ThriftResolveTest extends ThriftCodeInsightFixtureTestCase {
+public abstract class ThriftResolveTest extends ThriftCodeInsightFixtureTestCase {
   @Override
   protected String getBasePath() {
     return "resolve";

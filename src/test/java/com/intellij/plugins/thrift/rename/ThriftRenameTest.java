@@ -2,7 +2,7 @@ package com.intellij.plugins.thrift.rename;
 
 import com.intellij.plugins.thrift.ThriftCodeInsightFixtureTestCase;
 
-public class ThriftRenameTest extends ThriftCodeInsightFixtureTestCase {
+public abstract class ThriftRenameTest extends ThriftCodeInsightFixtureTestCase {
   @Override
   protected String getBasePath() {
     return "rename";

@@ -12,7 +12,7 @@ import consulo.util.dataholder.Key;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 
-public class ThriftFindUsagesTest extends ThriftCodeInsightFixtureTestCase {
+public abstract class ThriftFindUsagesTest extends ThriftCodeInsightFixtureTestCase {
   @Override
   protected String getBasePath() {
     return "usages";
