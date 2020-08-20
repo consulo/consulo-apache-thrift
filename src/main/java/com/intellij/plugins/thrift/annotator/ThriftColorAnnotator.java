@@ -1,7 +1,5 @@
 package com.intellij.plugins.thrift.annotator;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
@@ -15,6 +13,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by fkorotkov.
@@ -173,6 +174,6 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator
 	private void annotateKeyword(@Nonnull PsiElement element)
 	{
 		final Annotation annotation = myAnnotationHolder.createInfoAnnotation(element, null);
-		annotation.setTextAttributes(TextAttributesKey.find(ThriftSyntaxHighlighterColors.THRIFT_KEYWORD));
+		annotation.setTextAttributes(ThriftSyntaxHighlighterColors.KEYWORD);
 	}
 }

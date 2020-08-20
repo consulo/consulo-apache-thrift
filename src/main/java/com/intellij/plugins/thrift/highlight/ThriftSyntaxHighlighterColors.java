@@ -10,8 +10,6 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
  * Created by fkorotkov.
  */
 public class ThriftSyntaxHighlighterColors {
-  public static final String THRIFT_KEYWORD = "THRIFT_KEYWORD";
-
   public static final TextAttributesKey LINE_COMMENT =
     createTextAttributesKey("THRIFT_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
   public static final TextAttributesKey BLOCK_COMMENT =
