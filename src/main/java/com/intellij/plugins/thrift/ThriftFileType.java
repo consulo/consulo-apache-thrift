@@ -3,9 +3,8 @@ package com.intellij.plugins.thrift;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.jetbrains.annotations.NonNls;
+import consulo.apache.thrift.icon.ThriftIconGroup;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import consulo.apache.thrift.ThriftIcons;
 import consulo.ui.image.Image;
 
 /**
@@ -15,7 +14,6 @@ public class ThriftFileType extends LanguageFileType
 {
 	public static final ThriftFileType INSTANCE = new ThriftFileType();
 
-	@NonNls
 	public static final String DEFAULT_EXTENSION = "thrift";
 
 	protected ThriftFileType()
@@ -44,10 +42,10 @@ public class ThriftFileType extends LanguageFileType
 		return DEFAULT_EXTENSION;
 	}
 
-	@Nullable
+	@Nonnull
 	@Override
 	public Image getIcon()
 	{
-		return ThriftIcons.FileTypes.ApacheThrift;
+		return ThriftIconGroup.fileTypesApacheThrift();
 	}
 }
