@@ -1,14 +1,5 @@
 package com.intellij.plugins.thrift.index;
 
-import gnu.trove.THashMap;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.plugins.thrift.ThriftFileType;
@@ -19,13 +10,12 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
-import com.intellij.util.indexing.DataIndexer;
-import com.intellij.util.indexing.FileBasedIndex;
-import com.intellij.util.indexing.FileContent;
-import com.intellij.util.indexing.ID;
-import com.intellij.util.indexing.ScalarIndexExtension;
+import com.intellij.util.indexing.*;
 import com.intellij.util.io.EnumeratorStringDescriptor;
 import com.intellij.util.io.KeyDescriptor;
+
+import javax.annotation.Nonnull;
+import java.util.*;
 
 /**
  * Created by fkorotkov.
@@ -121,7 +111,7 @@ public class ThriftDeclarationIndex extends ScalarIndexExtension<String> {
     @Nonnull
     @Override
     public Map<String, Void> map(FileContent inputData) {
-      Map<String, Void> result = new THashMap<String, Void>();
+      Map<String, Void> result = new HashMap<String, Void>();
       for (PsiElement child : inputData.getPsiFile().getChildren()) {
         if (child instanceof ThriftTopLevelDeclaration) {
           String name = ((ThriftDeclaration)child).getName();
