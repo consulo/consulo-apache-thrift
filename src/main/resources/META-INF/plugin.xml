@@ -4,6 +4,9 @@
 	<description>Support for Thrift language</description>
 	<version>SNAPSHOT</version>
 	<vendor>Twitter, Inc.</vendor>
+	<tags>
+		<tag>serialize.framework</tag>
+	</tags>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="com.intellij.plugins.thrift.ThriftFileTypeLoader"/>
