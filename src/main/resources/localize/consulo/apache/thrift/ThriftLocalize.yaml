@@ -1,0 +1,10 @@
+thrift.name:
+  text: Thrift
+thrift.description:
+  text: Thrift interface definition
+thrift.inspection.unresolved.symbol:
+  text: Unresolved symbol
+thrift.inspection.unresolved.include:
+  text: Unresolved include
+inspections.group.name:
+  text: Thrift

@@ -1,11 +1,12 @@
 package com.intellij.plugins.thrift;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import consulo.apache.thrift.icon.ThriftIconGroup;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.apache.thrift.icon.ThriftIconGroup;
+import consulo.apache.thrift.localize.ThriftLocalize;
+import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by fkorotkov.
@@ -30,9 +31,9 @@ public class ThriftFileType extends LanguageFileType
 
 	@Nonnull
 	@Override
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return ThriftBundle.message("thrift.description");
+		return ThriftLocalize.thriftDescription();
 	}
 
 	@Nonnull
