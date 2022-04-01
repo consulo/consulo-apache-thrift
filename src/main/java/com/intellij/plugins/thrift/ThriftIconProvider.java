@@ -1,20 +1,12 @@
 package com.intellij.plugins.thrift;
 
-import javax.annotation.Nonnull;
+import com.intellij.plugins.thrift.lang.psi.*;
+import consulo.application.AllIcons;
+import consulo.language.icon.IconDescriptor;
+import consulo.language.icon.IconDescriptorUpdater;
+import consulo.language.psi.PsiElement;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.plugins.thrift.lang.psi.ThriftConst;
-import com.intellij.plugins.thrift.lang.psi.ThriftEnum;
-import com.intellij.plugins.thrift.lang.psi.ThriftException;
-import com.intellij.plugins.thrift.lang.psi.ThriftField;
-import com.intellij.plugins.thrift.lang.psi.ThriftFunction;
-import com.intellij.plugins.thrift.lang.psi.ThriftService;
-import com.intellij.plugins.thrift.lang.psi.ThriftStruct;
-import com.intellij.plugins.thrift.lang.psi.ThriftTypedef;
-import com.intellij.plugins.thrift.lang.psi.ThriftUnion;
-import com.intellij.psi.PsiElement;
-import consulo.ide.IconDescriptor;
-import consulo.ide.IconDescriptorUpdater;
+import javax.annotation.Nonnull;
 
 public class ThriftIconProvider implements IconDescriptorUpdater
 {

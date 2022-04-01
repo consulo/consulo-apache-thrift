@@ -1,11 +1,11 @@
 package com.intellij.plugins.thrift.lang.psi.manipulator;
 
-import com.intellij.openapi.util.TextRange;
 import com.intellij.plugins.thrift.lang.psi.ThriftCustomType;
-import com.intellij.psi.AbstractElementManipulator;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.util.IncorrectOperationException;
+import consulo.document.util.TextRange;
+import consulo.language.impl.psi.LeafPsiElement;
+import consulo.language.psi.AbstractElementManipulator;
+import consulo.language.psi.PsiElement;
+import consulo.language.util.IncorrectOperationException;
 
 public class ThriftCustomTypeManipulator extends AbstractElementManipulator<ThriftCustomType> {
   @Override

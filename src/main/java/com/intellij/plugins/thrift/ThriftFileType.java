@@ -1,10 +1,10 @@
 package com.intellij.plugins.thrift;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import consulo.apache.thrift.icon.ThriftIconGroup;
-import consulo.apache.thrift.localize.ThriftLocalize;
+import consulo.language.file.LanguageFileType;
 import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
+import conuslo.apache.thrift.localize.ThriftLocalize;
 
 import javax.annotation.Nonnull;
 
@@ -47,6 +47,6 @@ public class ThriftFileType extends LanguageFileType
 	@Override
 	public Image getIcon()
 	{
-		return ThriftIconGroup.fileTypesApacheThrift();
+		return ThriftIconGroup.filetypesApachethrift();
 	}
 }

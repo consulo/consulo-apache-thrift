@@ -1,6 +1,7 @@
 package com.intellij.plugins.thrift.lang.lexer;
-import com.intellij.lexer.*;
-import com.intellij.psi.tree.IElementType;
+
+import consulo.language.lexer.LexerBase;
+import consulo.language.ast.IElementType;
 import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
 
 %%
@@ -41,7 +42,7 @@ NUM_FLOAT = ( (({DIGIT}* "." {DIGIT}+) | ({DIGIT}+ "." {DIGIT}*)) {FLOAT_EXPONEN
 
 %%
 <YYINITIAL> {
-  {WHITE_SPACE}       { return com.intellij.psi.TokenType.WHITE_SPACE; }
+  {WHITE_SPACE}       { return consulo.language.ast.TokenType.WHITE_SPACE; }
 
   "{"                 { return LEFTCURLYBRACE; }
   "}"                 { return RIGHTCURLYBRACE; }
@@ -70,5 +71,5 @@ NUM_FLOAT = ( (({DIGIT}* "." {DIGIT}+) | ({DIGIT}+ "." {DIGIT}*)) {FLOAT_EXPONEN
   {STIDENTIFIER}      { return STIDENTIFIER; }
   {MULTIPLY}          { return MULTIPLY; }
 
-  [^] { return com.intellij.psi.TokenType.BAD_CHARACTER; }
+  [^] { return consulo.language.ast.TokenType.BAD_CHARACTER; }
 }

@@ -1,18 +1,18 @@
 package com.intellij.plugins.thrift.highlight;
 
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets.BAD_TOKENS;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets.OPERATORS;
-import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
+import com.intellij.plugins.thrift.lang.lexer._ThriftLexer;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.language.ast.IElementType;
+import consulo.language.editor.highlight.SyntaxHighlighterBase;
+import consulo.language.lexer.Lexer;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.plugins.thrift.lang.lexer._ThriftLexer;
-import com.intellij.psi.tree.IElementType;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets.BAD_TOKENS;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets.OPERATORS;
+import static com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes.*;
 
 /**
  * Created by fkorotkov.

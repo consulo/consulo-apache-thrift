@@ -1,9 +1,9 @@
 package com.intellij.plugins.thrift;
 
-import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.CodeDocumentationAwareCommenter;
+import consulo.language.ast.IElementType;
+import consulo.language.psi.PsiComment;
 
 /**
  * Created by fkorotkov.

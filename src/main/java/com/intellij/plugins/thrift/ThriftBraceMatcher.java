@@ -1,10 +1,11 @@
 package com.intellij.plugins.thrift;
 
-import com.intellij.lang.BracePair;
-import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.BracePair;
+import consulo.language.PairedBraceMatcher;
+import consulo.language.ast.IElementType;
+import consulo.language.psi.PsiFile;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 

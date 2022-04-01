@@ -1,13 +1,13 @@
 package com.intellij.plugins.thrift.lang.psi.presentation;
 
-import javax.annotation.Nullable;
-
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.navigation.ItemPresentationProvider;
-import com.intellij.openapi.util.Iconable;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
-import consulo.ide.IconDescriptorUpdaters;
+import consulo.component.util.Iconable;
+import consulo.language.icon.IconDescriptorUpdaters;
+import consulo.navigation.ItemPresentation;
+import consulo.navigation.ItemPresentationProvider;
 import consulo.ui.image.Image;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by fkorotkov.

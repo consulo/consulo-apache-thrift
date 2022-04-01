@@ -15,13 +15,13 @@
  */
 package com.intellij.plugins.thrift.lang.psi;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.plugins.thrift.ThriftFileType;
 import com.intellij.plugins.thrift.ThriftLanguage;
-import com.intellij.psi.FileViewProvider;
+import consulo.language.file.FileViewProvider;
+import consulo.language.impl.psi.PsiFileBase;
+import consulo.virtualFileSystem.fileType.FileType;
+
+import javax.annotation.Nonnull;
 
 public class ThriftFile extends PsiFileBase {
   public ThriftFile(@Nonnull FileViewProvider viewProvider) {

@@ -1,9 +1,10 @@
 package com.intellij.plugins.thrift;
 
-import com.intellij.codeInsight.hint.ImplementationTextSelectioner;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
-import com.intellij.psi.PsiElement;
+import consulo.document.util.TextRange;
+import consulo.language.editor.ImplementationTextSelectioner;
+import consulo.language.psi.PsiElement;
+
 import javax.annotation.Nonnull;
 
 public class ThriftImplementationTextSelectioner implements ImplementationTextSelectioner {

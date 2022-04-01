@@ -1,14 +1,14 @@
 package com.intellij.plugins.thrift;
 
-import com.intellij.navigation.ChooseByNameContributor;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.project.Project;
 import com.intellij.plugins.thrift.index.ThriftDeclarationIndex;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.ArrayUtil;
-import javax.annotation.Nonnull;
+import consulo.ide.navigation.ChooseByNameContributor;
+import consulo.language.psi.scope.GlobalSearchScope;
+import consulo.navigation.NavigationItem;
+import consulo.project.Project;
+import consulo.util.collection.ArrayUtil;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 /**

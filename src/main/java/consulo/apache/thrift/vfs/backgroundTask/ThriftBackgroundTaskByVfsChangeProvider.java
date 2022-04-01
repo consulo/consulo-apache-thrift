@@ -1,11 +1,11 @@
 package consulo.apache.thrift.vfs.backgroundTask;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.plugins.thrift.ThriftFileType;
-import consulo.backgroundTaskByVfsChange.BackgroundTaskByVfsChangeProvider;
-import consulo.backgroundTaskByVfsChange.BackgroundTaskByVfsParameters;
+import consulo.application.util.SystemInfo;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.fileWatcher.BackgroundTaskByVfsChangeProvider;
+import consulo.virtualFileSystem.fileWatcher.BackgroundTaskByVfsParameters;
 
 import javax.annotation.Nonnull;
 

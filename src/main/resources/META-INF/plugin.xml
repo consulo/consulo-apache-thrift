@@ -8,7 +8,7 @@
 		<tag>serialize.framework</tag>
 	</tags>
 
-	<extensions defaultExtensionNs="com.intellij">
+	<extensions defaultExtensionNs="consulo">
 		<fileTypeFactory implementation="com.intellij.plugins.thrift.ThriftFileTypeLoader"/>
 		<lang.parserDefinition language="thrift" implementationClass="com.intellij.plugins.thrift.lang.parser.ThriftParserDefinition"/>
 		<completion.contributor language="any" implementationClass="com.intellij.plugins.thrift.completion.ThriftKeywordCompletionContributor"/>

@@ -15,10 +15,11 @@
  */
 package com.intellij.plugins.thrift.lang.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
 import com.intellij.plugins.thrift.lang.psi.ThriftPsiCompositeElement;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.impl.psi.ASTWrapperPsiElement;
+
 import javax.annotation.Nonnull;
 
 public class ThriftPsiCompositeElementImpl extends ASTWrapperPsiElement implements ThriftPsiCompositeElement {

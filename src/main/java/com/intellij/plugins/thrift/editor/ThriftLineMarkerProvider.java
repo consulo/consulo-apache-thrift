@@ -1,36 +1,29 @@
 package com.intellij.plugins.thrift.editor;
 
-import com.intellij.codeHighlighting.Pass;
-import com.intellij.codeInsight.daemon.DaemonBundle;
-import com.intellij.codeInsight.daemon.GutterIconNavigationHandler;
-import com.intellij.codeInsight.daemon.LineMarkerInfo;
-import com.intellij.codeInsight.daemon.LineMarkerProvider;
-import com.intellij.codeInsight.daemon.impl.PsiElementListNavigator;
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.util.DefaultPsiElementCellRenderer;
-import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.plugins.thrift.lang.psi.ThriftDefinitionName;
 import com.intellij.plugins.thrift.util.ThriftPsiUtil;
-import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.Function;
+import consulo.application.AllIcons;
+import consulo.codeEditor.markup.GutterIconRenderer;
+import consulo.language.editor.DaemonBundle;
+import consulo.language.editor.Pass;
+import consulo.language.editor.gutter.GutterIconNavigationHandler;
+import consulo.language.editor.gutter.LineMarkerInfo;
+import consulo.language.editor.gutter.LineMarkerProvider;
+import consulo.language.editor.ui.DefaultPsiElementCellRenderer;
+import consulo.language.editor.ui.PsiElementListNavigator;
+import consulo.language.psi.NavigatablePsiElement;
+import consulo.language.psi.PsiElement;
+
 import javax.annotation.Nonnull;
-
-import java.awt.event.MouseEvent;
-import java.util.Collection;
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * Created by fkorotkov.
  */
 public class ThriftLineMarkerProvider implements LineMarkerProvider {
-  @Override
-  public void collectSlowLineMarkers(@Nonnull List<PsiElement> elements, @Nonnull Collection<LineMarkerInfo> result) {
-
-  }
-
   @Nullable
   @Override
   public LineMarkerInfo getLineMarkerInfo(@Nonnull PsiElement element) {
@@ -53,7 +46,7 @@ public class ThriftLineMarkerProvider implements LineMarkerProvider {
       Pass.UPDATE_ALL,
       new Function<PsiElement, String>() {
         @Override
-        public String fun(PsiElement element) {
+        public String apply(PsiElement element) {
           return DaemonBundle.message("interface.is.implemented.too.many");
         }
       },
