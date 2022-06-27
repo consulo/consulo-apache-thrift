@@ -22,7 +22,6 @@
 		<annotator language="thrift" implementationClass="com.intellij.plugins.thrift.annotator.ThriftColorAnnotator"/>
 		<!--<lang.formatter/>-->
 
-		<lang.braceMatcher language="thrift" implementationClass="com.intellij.plugins.thrift.ThriftBraceMatcher"/>
 		<lang.implementationTextSelectioner language="thrift"
 											implementationClass="com.intellij.plugins.thrift.ThriftImplementationTextSelectioner"/>
 
@@ -32,9 +31,6 @@
 		<!--<langCodeStyleSettingsProvider/>-->
 
 		<quoteHandler fileType="Thrift" className="com.intellij.plugins.thrift.ThriftQuoteHandler"/>
-
-		<gotoClassContributor implementation="com.intellij.plugins.thrift.ThriftClassContributor"/>
-		<gotoSymbolContributor implementation="com.intellij.plugins.thrift.ThriftSymbolContributor"/>
 
 		<localInspection language="thrift" shortName="ThriftUnresolvedSymbol" bundle="com.intellij.plugins.thrift.ThriftBundle"
 						 key="thrift.inspection.unresolved.symbol"

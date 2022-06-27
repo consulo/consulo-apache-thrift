@@ -3,8 +3,10 @@ package com.intellij.plugins.thrift.util;
 import com.intellij.plugins.thrift.ThriftClassContributor;
 import com.intellij.plugins.thrift.ThriftFileType;
 import com.intellij.plugins.thrift.lang.psi.*;
+import consulo.application.Application;
 import consulo.application.util.function.Processor;
 import consulo.ide.navigation.ChooseByNameContributor;
+import consulo.ide.navigation.GotoClassOrTypeContributor;
 import consulo.language.impl.psi.LeafPsiElement;
 import consulo.language.psi.*;
 import consulo.language.psi.path.FileReferenceSet;
@@ -164,7 +166,7 @@ public class ThriftPsiUtil {
 
   public static void processImplementations(ThriftDefinitionName definitionName, @Nonnull Processor<NavigatablePsiElement> processor) {
     String name = definitionName.getText();
-    for (ChooseByNameContributor contributor : ChooseByNameContributor.CLASS_EP_NAME.getExtensionList()) {
+    for (ChooseByNameContributor contributor : Application.get().getExtensionList(GotoClassOrTypeContributor.class)) {
       if (!(contributor instanceof ThriftClassContributor)) {
         for (NavigationItem navigationItem : contributor.getItemsByName(name, name, definitionName.getProject(), false)) {
           if (navigationItem instanceof NavigatablePsiElement && !processor.process((NavigatablePsiElement)navigationItem)) {
