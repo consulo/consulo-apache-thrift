@@ -1,6 +1,7 @@
 package com.intellij.plugins.thrift.completion;
 
 import com.intellij.plugins.thrift.ThriftLanguage;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.codeEditor.Editor;
 import consulo.language.editor.action.TypedHandlerDelegate;
 import consulo.language.psi.PsiFile;
@@ -11,6 +12,7 @@ import javax.annotation.Nonnull;
 /**
  * Created by fkorotkov.
  */
+@ExtensionImpl
 public class ThriftTypeHandler extends TypedHandlerDelegate {
   @Override
   public Result charTyped(char c, Project project, @Nonnull Editor editor, @Nonnull PsiFile file) {

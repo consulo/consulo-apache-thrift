@@ -1,6 +1,7 @@
 package com.intellij.plugins.thrift;
 
 import com.intellij.plugins.thrift.lang.psi.*;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.application.AllIcons;
 import consulo.language.icon.IconDescriptor;
 import consulo.language.icon.IconDescriptorUpdater;
@@ -8,6 +9,7 @@ import consulo.language.psi.PsiElement;
 
 import javax.annotation.Nonnull;
 
+@ExtensionImpl
 public class ThriftIconProvider implements IconDescriptorUpdater
 {
 	@Override

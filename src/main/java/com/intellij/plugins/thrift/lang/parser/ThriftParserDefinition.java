@@ -15,10 +15,13 @@
  */
 package com.intellij.plugins.thrift.lang.parser;
 
+import com.intellij.plugins.thrift.ThriftLanguage;
 import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypeSets;
 import com.intellij.plugins.thrift.lang.lexer.ThriftTokenTypes;
 import com.intellij.plugins.thrift.lang.lexer._ThriftLexer;
 import com.intellij.plugins.thrift.lang.psi.ThriftFile;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
 import consulo.language.ast.ASTNode;
 import consulo.language.ast.IFileElementType;
 import consulo.language.ast.TokenSet;
@@ -32,57 +35,75 @@ import consulo.language.version.LanguageVersion;
 
 import javax.annotation.Nonnull;
 
-public class ThriftParserDefinition implements ParserDefinition {
-  @Override
-  @Nonnull
-  public Lexer createLexer(@Nonnull LanguageVersion languageVersion) {
-    return new _ThriftLexer();
-  }
+@ExtensionImpl
+public class ThriftParserDefinition implements ParserDefinition
+{
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return ThriftLanguage.INSTANCE;
+	}
 
-  @Nonnull
-  @Override
-  public PsiParser createParser(@Nonnull LanguageVersion languageVersion) {
-    return new ThriftParser();
-  }
+	@Override
+	@Nonnull
+	public Lexer createLexer(@Nonnull LanguageVersion languageVersion)
+	{
+		return new _ThriftLexer();
+	}
 
-  @Nonnull
-  @Override
-  public IFileElementType getFileNodeType() {
-    return ThriftTokenTypeSets.THRIFT_FILE;
-  }
+	@Nonnull
+	@Override
+	public PsiParser createParser(@Nonnull LanguageVersion languageVersion)
+	{
+		return new ThriftParser();
+	}
 
-  @Override
-  @Nonnull
-  public TokenSet getWhitespaceTokens(@Nonnull LanguageVersion languageVersion) {
-    return ThriftTokenTypeSets.WHITESPACES;
-  }
+	@Nonnull
+	@Override
+	public IFileElementType getFileNodeType()
+	{
+		return ThriftTokenTypeSets.THRIFT_FILE;
+	}
 
-  @Override
-  @Nonnull
-  public TokenSet getCommentTokens(@Nonnull LanguageVersion languageVersion) {
-    return ThriftTokenTypeSets.COMMENTS;
-  }
+	@Override
+	@Nonnull
+	public TokenSet getWhitespaceTokens(@Nonnull LanguageVersion languageVersion)
+	{
+		return ThriftTokenTypeSets.WHITESPACES;
+	}
 
-  @Override
-  @Nonnull
-  public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion) {
-    return ThriftTokenTypeSets.STRINGS;
-  }
+	@Override
+	@Nonnull
+	public TokenSet getCommentTokens(@Nonnull LanguageVersion languageVersion)
+	{
+		return ThriftTokenTypeSets.COMMENTS;
+	}
 
-  @Override
-  @Nonnull
-  public PsiElement createElement(ASTNode node) {
-    return ThriftTokenTypes.Factory.createElement(node);
-  }
+	@Override
+	@Nonnull
+	public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion)
+	{
+		return ThriftTokenTypeSets.STRINGS;
+	}
 
-  @Override
-  public PsiFile createFile(FileViewProvider viewProvider) {
-    return new ThriftFile(viewProvider);
-  }
+	@Override
+	@Nonnull
+	public PsiElement createElement(ASTNode node)
+	{
+		return ThriftTokenTypes.Factory.createElement(node);
+	}
 
-  @Nonnull
-  @Override
-  public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
-    return SpaceRequirements.MAY;
-  }
+	@Override
+	public PsiFile createFile(FileViewProvider viewProvider)
+	{
+		return new ThriftFile(viewProvider);
+	}
+
+	@Nonnull
+	@Override
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
+	{
+		return SpaceRequirements.MAY;
+	}
 }

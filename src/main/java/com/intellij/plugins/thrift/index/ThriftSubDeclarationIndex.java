@@ -3,6 +3,7 @@ package com.intellij.plugins.thrift.index;
 import com.intellij.plugins.thrift.ThriftFileType;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.application.util.function.Processor;
 import consulo.index.io.DataIndexer;
 import consulo.index.io.EnumeratorStringDescriptor;
@@ -26,6 +27,7 @@ import java.util.*;
 /**
  * Created by fkorotkov.
  */
+@ExtensionImpl
 public class ThriftSubDeclarationIndex extends FileBasedIndexExtension<String, String> {
   public static final ID<String, String> THRIFT_DECLARATION_INDEX = ID.create("ThriftSubDeclarationIndex");
   private final EnumeratorStringDescriptor myKeyDescriptor = new EnumeratorStringDescriptor();
