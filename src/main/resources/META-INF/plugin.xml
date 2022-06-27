@@ -18,9 +18,6 @@
 		<lang.elementManipulator forClass="com.intellij.plugins.thrift.lang.psi.ThriftCustomType"
 								 implementationClass="com.intellij.plugins.thrift.lang.psi.manipulator.ThriftCustomTypeManipulator"/>
 
-		<annotator language="thrift" implementationClass="com.intellij.plugins.thrift.annotator.ThriftColorAnnotator"/>
-		<!--<lang.formatter/>-->
-
 		<lang.implementationTextSelectioner language="thrift"
 											implementationClass="com.intellij.plugins.thrift.ThriftImplementationTextSelectioner"/>
 
