@@ -15,10 +15,13 @@
  */
 package com.intellij.plugins.thrift.structure;
 
+import com.intellij.plugins.thrift.ThriftLanguage;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.codeEditor.Editor;
 import consulo.fileEditor.structureView.StructureViewBuilder;
 import consulo.fileEditor.structureView.StructureViewModel;
 import consulo.fileEditor.structureView.TreeBasedStructureViewBuilder;
+import consulo.language.Language;
 import consulo.language.editor.structureView.PsiStructureViewFactory;
 import consulo.language.psi.PsiFile;
 
@@ -28,6 +31,7 @@ import javax.annotation.Nullable;
 /**
  * @author Fedor.Korotkov
  */
+@ExtensionImpl
 public class ThriftStructureViewFactory implements PsiStructureViewFactory
 {
 	@Override
@@ -48,5 +52,12 @@ public class ThriftStructureViewFactory implements PsiStructureViewFactory
 				return false;
 			}
 		};
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return ThriftLanguage.INSTANCE;
 	}
 }

@@ -9,10 +9,6 @@
 	</tags>
 
 	<extensions defaultExtensionNs="consulo">
-		<lang.psiStructureViewFactory language="thrift" implementationClass="com.intellij.plugins.thrift.structure.ThriftStructureViewFactory"/>
-		<lang.elementManipulator forClass="com.intellij.plugins.thrift.lang.psi.ThriftCustomType"
-								 implementationClass="com.intellij.plugins.thrift.lang.psi.manipulator.ThriftCustomTypeManipulator"/>
-
 
 		<localInspection language="thrift" shortName="ThriftUnresolvedSymbol" bundle="com.intellij.plugins.thrift.ThriftBundle"
 						 key="thrift.inspection.unresolved.symbol"
