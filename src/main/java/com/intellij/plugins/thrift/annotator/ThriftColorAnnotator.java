@@ -7,9 +7,9 @@ import com.intellij.plugins.thrift.util.ThriftUtils;
 import consulo.codeEditor.DefaultLanguageHighlighterColors;
 import consulo.colorScheme.TextAttributesKey;
 import consulo.language.ast.IElementType;
-import consulo.language.editor.annotation.Annotation;
 import consulo.language.editor.annotation.AnnotationHolder;
 import consulo.language.editor.annotation.Annotator;
+import consulo.language.editor.annotation.HighlightSeverity;
 import consulo.language.impl.psi.LeafPsiElement;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiReference;
@@ -135,12 +135,10 @@ public class ThriftColorAnnotator extends ThriftVisitor implements Annotator {
     if (attributesKey == null) {
       return;
     }
-    Annotation annotation = myAnnotationHolder.createInfoAnnotation(target, null);
-    annotation.setTextAttributes(attributesKey);
+    myAnnotationHolder.newSilentAnnotation(HighlightSeverity.INFORMATION).textAttributes(attributesKey).range(target).create();
   }
 
   private void annotateKeyword(@Nonnull PsiElement element) {
-    final Annotation annotation = myAnnotationHolder.createInfoAnnotation(element, null);
-    annotation.setTextAttributes(ThriftSyntaxHighlighterColors.KEYWORD);
+    myAnnotationHolder.newSilentAnnotation(HighlightSeverity.INFORMATION).textAttributes(ThriftSyntaxHighlighterColors.KEYWORD).range(element).create();
   }
 }
