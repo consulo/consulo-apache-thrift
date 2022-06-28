@@ -8,7 +8,7 @@ import consulo.language.psi.PsiElement;
 import consulo.language.psi.util.PsiTreeUtil;
 import consulo.language.util.IncorrectOperationException;
 import consulo.navigation.ItemPresentation;
-import consulo.navigation.ItemPresentationProviders;
+import consulo.navigation.ItemPresentationProvider;
 import org.jetbrains.annotations.NonNls;
 
 import javax.annotation.Nonnull;
@@ -45,7 +45,7 @@ public class AbstractThriftDeclaration extends ThriftPsiCompositeElementImpl imp
 
   @Override
   public ItemPresentation getPresentation() {
-    return ItemPresentationProviders.getItemPresentation(this);
+    return ItemPresentationProvider.getItemPresentation(this);
   }
 
   @Nonnull

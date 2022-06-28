@@ -9,24 +9,10 @@
 	</tags>
 
 	<extensions defaultExtensionNs="consulo">
-		<completion.contributor language="any" implementationClass="com.intellij.plugins.thrift.completion.ThriftKeywordCompletionContributor"/>
-		<itemPresentationProvider forClass="com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration"
-								  implementationClass="com.intellij.plugins.thrift.lang.psi.presentation.ThriftTopLevelDeclarationPresentationProvider"/>
-		<itemPresentationProvider forClass="com.intellij.plugins.thrift.lang.psi.ThriftSubDeclaration"
-								  implementationClass="com.intellij.plugins.thrift.lang.psi.presentation.ThriftSubDeclarationPresentationProvider"/>
 		<lang.psiStructureViewFactory language="thrift" implementationClass="com.intellij.plugins.thrift.structure.ThriftStructureViewFactory"/>
 		<lang.elementManipulator forClass="com.intellij.plugins.thrift.lang.psi.ThriftCustomType"
 								 implementationClass="com.intellij.plugins.thrift.lang.psi.manipulator.ThriftCustomTypeManipulator"/>
 
-		<lang.implementationTextSelectioner language="thrift"
-											implementationClass="com.intellij.plugins.thrift.ThriftImplementationTextSelectioner"/>
-
-		<!--<colorSettingsPage/>-->
-		<!--<codeStyleSettingsProvider/>-->
-
-		<!--<langCodeStyleSettingsProvider/>-->
-
-		<quoteHandler fileType="Thrift" className="com.intellij.plugins.thrift.ThriftQuoteHandler"/>
 
 		<localInspection language="thrift" shortName="ThriftUnresolvedSymbol" bundle="com.intellij.plugins.thrift.ThriftBundle"
 						 key="thrift.inspection.unresolved.symbol"
