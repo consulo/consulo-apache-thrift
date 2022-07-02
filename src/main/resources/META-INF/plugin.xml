@@ -7,17 +7,4 @@
 	<tags>
 		<tag>serialize.framework</tag>
 	</tags>
-
-	<extensions defaultExtensionNs="consulo">
-
-		<localInspection language="thrift" shortName="ThriftUnresolvedSymbol" bundle="com.intellij.plugins.thrift.ThriftBundle"
-						 key="thrift.inspection.unresolved.symbol"
-						 groupKey="inspections.group.name" enabledByDefault="true"
-						 implementationClass="com.intellij.plugins.thrift.inspections.ThriftUnresolvedSymbolInspection"/>
-		<localInspection language="thrift" shortName="ThriftUnresolvedInclude" bundle="com.intellij.plugins.thrift.ThriftBundle"
-						 key="thrift.inspection.unresolved.include"
-						 groupKey="inspections.group.name" enabledByDefault="true"
-						 implementationClass="com.intellij.plugins.thrift.inspections.ThriftUnresolvedIncludeInspection"/>
-
-	</extensions>
 </consulo-plugin>
