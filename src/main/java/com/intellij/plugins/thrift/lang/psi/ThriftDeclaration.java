@@ -1,7 +1,7 @@
 package com.intellij.plugins.thrift.lang.psi;
 
-import com.intellij.navigation.NavigationItem;
-import com.intellij.psi.PsiNamedElement;
+import consulo.language.psi.PsiNamedElement;
+import consulo.navigation.NavigationItem;
 
 /**
  * Created by fkorotkov.

@@ -1,23 +1,22 @@
 package com.intellij.plugins.thrift.lang.psi;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.plugins.thrift.util.ThriftPsiUtil;
+import consulo.application.util.function.Processor;
+import consulo.document.util.TextRange;
+import consulo.language.editor.completion.lookup.LookupElementBuilder;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiReferenceBase;
+import consulo.util.collection.ArrayUtil;
+import consulo.util.io.FileUtil;
+import consulo.util.io.PathUtil;
+import consulo.util.lang.Pair;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.plugins.thrift.util.ThriftPsiUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiReferenceBase;
-import com.intellij.util.ArrayUtil;
-import com.intellij.util.Function;
-import com.intellij.util.PathUtil;
-import com.intellij.util.Processor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * Created by fkorotkov.
@@ -32,7 +31,7 @@ public class ThriftTypeReference extends PsiReferenceBase<ThriftCustomType> {
   public PsiElement resolve() {
     return processComponentAndFile(new Function<Pair<String, PsiFile>, PsiElement>() {
       @Override
-      public PsiElement fun(@Nullable Pair<String, PsiFile> pair) {
+      public PsiElement apply(@Nullable Pair<String, PsiFile> pair) {
         return pair != null ? ThriftPsiUtil.findDeclaration(pair.getFirst(), pair.getSecond()) : null;
       }
     });
@@ -43,7 +42,7 @@ public class ThriftTypeReference extends PsiReferenceBase<ThriftCustomType> {
   public Object[] getVariants() {
     Object[] result = processComponentAndFile(new Function<Pair<String, PsiFile>, Object[]>() {
       @Override
-      public Object[] fun(Pair<String, PsiFile> pair) {
+      public Object[] apply(Pair<String, PsiFile> pair) {
         final List<Object> result = new ArrayList<Object>();
         PsiFile psiFile = pair.getSecond();
         ThriftPsiUtil.processDeclarations(psiFile, new Processor<ThriftDeclaration>() {
@@ -83,10 +82,10 @@ public class ThriftTypeReference extends PsiReferenceBase<ThriftCustomType> {
       String componentName = name.substring(index);
       ThriftInclude include = ThriftPsiUtil.findImportByPrefix(getElement().getContainingFile(), fileName);
       PsiFile includedFile = ThriftPsiUtil.resolveInclude(include);
-      return includedFile != null ? fun.fun(Pair.create(componentName, includedFile)) : null;
+      return includedFile != null ? fun.apply(Pair.create(componentName, includedFile)) : null;
     }
     else {
-      return fun.fun(Pair.create(name, getElement().getContainingFile()));
+      return fun.apply(Pair.create(name, getElement().getContainingFile()));
     }
   }
 }

@@ -1,18 +1,29 @@
 package com.intellij.plugins.thrift.lang.psi.presentation;
 
-import javax.annotation.Nullable;
-
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.navigation.ItemPresentationProvider;
-import com.intellij.openapi.util.Iconable;
 import com.intellij.plugins.thrift.lang.psi.ThriftSubDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration;
-import com.intellij.psi.util.PsiTreeUtil;
-import consulo.ide.IconDescriptorUpdaters;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.component.util.Iconable;
+import consulo.language.icon.IconDescriptorUpdaters;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.navigation.ItemPresentation;
+import consulo.navigation.ItemPresentationProvider;
 import consulo.ui.image.Image;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+@ExtensionImpl
 public class ThriftSubDeclarationPresentationProvider implements ItemPresentationProvider<ThriftSubDeclaration>
 {
+	@Nonnull
+	@Override
+	public Class<ThriftSubDeclaration> getItemClass()
+	{
+		return ThriftSubDeclaration.class;
+	}
+
+	@Nonnull
 	@Override
 	public ItemPresentation getPresentation(final ThriftSubDeclaration item)
 	{

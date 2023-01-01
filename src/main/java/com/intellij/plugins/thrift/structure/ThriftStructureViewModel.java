@@ -15,99 +15,83 @@
  */
 package com.intellij.plugins.thrift.structure;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NonNls;
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.IdeBundle;
-import com.intellij.ide.structureView.StructureViewModel;
-import com.intellij.ide.structureView.StructureViewModelBase;
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
-import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
-import com.intellij.ide.util.treeView.smartTree.Filter;
-import com.intellij.ide.util.treeView.smartTree.Sorter;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftSubDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import consulo.application.AllIcons;
+import consulo.fileEditor.structureView.StructureViewModel;
+import consulo.fileEditor.structureView.StructureViewTreeElement;
+import consulo.fileEditor.structureView.tree.*;
+import consulo.ide.IdeBundle;
+import consulo.language.editor.structureView.StructureViewModelBase;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import org.jetbrains.annotations.NonNls;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author Fedor.Korotkov
  */
-public class ThriftStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider
-{
-	public ThriftStructureViewModel(@Nonnull PsiFile psiFile)
-	{
-		super(psiFile, new ThriftStructureViewElement(psiFile));
-		withSorters(Sorter.ALPHA_SORTER);
-		withSuitableClasses(ThriftDeclaration.class);
-	}
+public class ThriftStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
+  public ThriftStructureViewModel(@Nonnull PsiFile psiFile) {
+    super(psiFile, new ThriftStructureViewElement(psiFile));
+    withSorters(Sorter.ALPHA_SORTER);
+    withSuitableClasses(ThriftDeclaration.class);
+  }
 
-	@Override
-	public boolean isAlwaysShowsPlus(StructureViewTreeElement element)
-	{
-		return false;
-	}
+  @Override
+  public boolean isAlwaysShowsPlus(StructureViewTreeElement element) {
+    return false;
+  }
 
-	@Nonnull
-	@Override
-	public Filter[] getFilters()
-	{
-		return new Filter[]{ourFieldsFilter};
-	}
+  @Nonnull
+  @Override
+  public Filter[] getFilters() {
+    return new Filter[]{ourFieldsFilter};
+  }
 
-	@Override
-	public boolean isAlwaysLeaf(StructureViewTreeElement element)
-	{
-		final Object value = element.getValue();
-		return value instanceof ThriftSubDeclaration;
-	}
+  @Override
+  public boolean isAlwaysLeaf(StructureViewTreeElement element) {
+    final Object value = element.getValue();
+    return value instanceof ThriftSubDeclaration;
+  }
 
-	@Override
-	public boolean shouldEnterElement(Object element)
-	{
-		return element instanceof ThriftTopLevelDeclaration;
-	}
+  @Override
+  public boolean shouldEnterElement(Object element) {
+    return element instanceof ThriftTopLevelDeclaration;
+  }
 
 
-	private static final Filter ourFieldsFilter = new Filter()
-	{
-		@NonNls
-		public static final String ID = "SHOW_FIELDS";
+  private static final Filter ourFieldsFilter = new Filter() {
+    @NonNls
+    public static final String ID = "SHOW_FIELDS";
 
-		@Override
-		public boolean isVisible(TreeElement treeNode)
-		{
-			if(!(treeNode instanceof ThriftStructureViewElement))
-			{
-				return true;
-			}
-			final PsiElement element = ((ThriftStructureViewElement) treeNode).getRealElement();
+    @Override
+    public boolean isVisible(TreeElement treeNode) {
+      if (!(treeNode instanceof ThriftStructureViewElement)) {
+        return true;
+      }
+      final PsiElement element = ((ThriftStructureViewElement) treeNode).getRealElement();
 
-			return !(element instanceof ThriftSubDeclaration);
-		}
+      return !(element instanceof ThriftSubDeclaration);
+    }
 
-		@Override
-		public boolean isReverted()
-		{
-			return true;
-		}
+    @Override
+    public boolean isReverted() {
+      return true;
+    }
 
-		@Override
-		@Nonnull
-		public ActionPresentation getPresentation()
-		{
-			return new ActionPresentationData(IdeBundle.message("action.structureview.show.fields"), null, AllIcons.Nodes.Field);
-		}
+    @Override
+    @Nonnull
+    public ActionPresentation getPresentation() {
+      return new ActionPresentationData(IdeBundle.message("action.structureview.show.fields"), null, AllIcons.Nodes.Field);
+    }
 
-		@Override
-		@Nonnull
-		public String getName()
-		{
-			return ID;
-		}
-	};
+    @Override
+    @Nonnull
+    public String getName() {
+      return ID;
+    }
+  };
 }

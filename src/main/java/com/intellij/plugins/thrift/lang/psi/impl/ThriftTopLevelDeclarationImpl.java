@@ -1,12 +1,12 @@
 package com.intellij.plugins.thrift.lang.psi.impl;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclarationBody;
 import com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration;
-import com.intellij.psi.util.PsiTreeUtil;
-import javax.annotation.Nonnull;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.util.PsiTreeUtil;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 

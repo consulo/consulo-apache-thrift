@@ -1,16 +1,18 @@
 package com.intellij.plugins.thrift.completion;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
 import com.intellij.plugins.thrift.ThriftLanguage;
-import com.intellij.psi.PsiFile;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.codeEditor.Editor;
+import consulo.language.editor.action.TypedHandlerDelegate;
+import consulo.language.psi.PsiFile;
+import consulo.project.Project;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by fkorotkov.
  */
+@ExtensionImpl
 public class ThriftTypeHandler extends TypedHandlerDelegate {
   @Override
   public Result charTyped(char c, Project project, @Nonnull Editor editor, @Nonnull PsiFile file) {

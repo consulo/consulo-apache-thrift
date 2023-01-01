@@ -1,9 +1,10 @@
 package com.intellij.plugins.thrift.lang.psi;
 
-import com.intellij.openapi.util.TextRange;
 import com.intellij.plugins.thrift.util.ThriftPsiUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReferenceBase;
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiReferenceBase;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 

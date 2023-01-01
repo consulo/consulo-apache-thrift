@@ -1,32 +1,67 @@
 package com.intellij.plugins.thrift;
 
-import com.intellij.navigation.ChooseByNameContributor;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.project.Project;
 import com.intellij.plugins.thrift.index.ThriftSubDeclarationIndex;
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.ArrayUtil;
+import com.intellij.plugins.thrift.lang.psi.ThriftTopLevelDeclaration;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.util.function.Processor;
+import consulo.content.scope.SearchScope;
+import consulo.ide.navigation.GotoSymbolContributor;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
+import consulo.language.psi.search.FindSymbolParameters;
+import consulo.language.psi.stub.FileBasedIndex;
+import consulo.language.psi.stub.IdFilter;
+import consulo.navigation.NavigationItem;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collections;
 
-import java.util.List;
+@ExtensionImpl
+public class ThriftSymbolContributor implements GotoSymbolContributor
+{
+	@Override
+	public void processNames(@Nonnull Processor<String> processor, @Nonnull SearchScope searchScope, @Nullable IdFilter idFilter)
+	{
+		FileBasedIndex.getInstance().processAllKeys(ThriftSubDeclarationIndex.THRIFT_DECLARATION_INDEX, processor, searchScope, idFilter);
+	}
 
-public class ThriftSymbolContributor implements ChooseByNameContributor {
-  @Nonnull
-  @Override
-  public String[] getNames(Project project, boolean includeNonProjectItems) {
-    return ArrayUtil.toStringArray(ThriftSubDeclarationIndex.findAllKeys(project, getScope(project, includeNonProjectItems)));
-  }
-
-  @Nonnull
-  @Override
-  public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
-    List<ThriftDeclaration> declarations =
-      ThriftSubDeclarationIndex.findDeclaration(null, name, project, getScope(project, includeNonProjectItems));
-    return declarations.toArray(new NavigationItem[declarations.size()]);
-  }
-
-  private GlobalSearchScope getScope(Project project, boolean includeNonProjectItems) {
-    return includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
-  }
+	@Override
+	public void processElementsWithName(@Nonnull String className, @Nonnull Processor<NavigationItem> processor, @Nonnull FindSymbolParameters findSymbolParameters)
+	{
+		final PsiManager manager = PsiManager.getInstance(findSymbolParameters.getProject());
+		FileBasedIndex.getInstance().getFilesWithKey(ThriftSubDeclarationIndex.THRIFT_DECLARATION_INDEX, Collections.singleton(className), file -> {
+					PsiFile psiFile = manager.findFile(file);
+					if(psiFile != null)
+					{
+						for(PsiElement child : psiFile.getChildren())
+						{
+							if(!(child instanceof ThriftTopLevelDeclaration))
+							{
+								continue;
+							}
+							if(className != null && !className.equals(((ThriftTopLevelDeclaration) child).getName()))
+							{
+								continue;
+							}
+							for(ThriftDeclaration declaration : ((ThriftTopLevelDeclaration) child).findSubDeclarations())
+							{
+								String subName = declaration.getName();
+								if(subName != null && className.equals(subName))
+								{
+									if(!processor.process(declaration))
+									{
+										return false;
+									}
+								}
+							}
+						}
+					}
+					return true;
+				},
+				findSymbolParameters.getSearchScope()
+		);
+	}
 }

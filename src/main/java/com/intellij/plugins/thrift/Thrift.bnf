@@ -1,6 +1,6 @@
 {
+    version="3"
     parserClass="com.intellij.plugins.thrift.lang.parser.ThriftParser"
-    parserUtilClass="com.intellij.lang.parser.GeneratedParserUtilBase"
     psiImplUtilClass="com.intellij.plugins.thrift.util.ThriftPsiUtil"
 
     implements="com.intellij.plugins.thrift.lang.psi.ThriftPsiCompositeElement"
@@ -70,7 +70,7 @@ NamespaceScope  ::=  Multiply | 'cpp' | 'java' | 'py' | 'py.twisted' | 'perl' | 
                      'cocoa' | 'csharp' | 'c_glib' | 'go' | 'php' | 'delphi' | 'd'
 
 DefinitionName ::= Identifier
-{implements="com.intellij.psi.PsiNamedElement, com.intellij.navigation.NavigationItem, com.intellij.psi.PsiNameIdentifierOwner" methods=[
+{implements="consulo.language.psi.PsiNamedElement, consulo.navigation.NavigationItem, consulo.language.psi.PsiNameIdentifierOwner" methods=[
   setName
   getName
   getNameIdentifier

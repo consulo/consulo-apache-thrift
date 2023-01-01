@@ -1,77 +1,102 @@
 package com.intellij.plugins.thrift.inspections;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.Nls;
-
-import javax.annotation.Nullable;
-
-import com.intellij.codeInspection.InspectionManager;
-import com.intellij.codeInspection.LocalInspectionTool;
-import com.intellij.codeInspection.ProblemDescriptor;
-import com.intellij.codeInspection.ProblemHighlightType;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.plugins.thrift.ThriftBundle;
+import com.intellij.plugins.thrift.ThriftLanguage;
 import com.intellij.plugins.thrift.lang.psi.ThriftInclude;
 import com.intellij.plugins.thrift.lang.psi.ThriftVisitor;
 import com.intellij.plugins.thrift.util.ThriftPsiUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.ArrayUtil;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.document.util.TextRange;
+import consulo.language.Language;
+import consulo.language.editor.inspection.LocalInspectionTool;
+import consulo.language.editor.inspection.ProblemDescriptor;
+import consulo.language.editor.inspection.ProblemHighlightType;
+import consulo.language.editor.inspection.scheme.InspectionManager;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.util.collection.ArrayUtil;
+import org.jetbrains.annotations.Nls;
 
-public class ThriftUnresolvedIncludeInspection extends LocalInspectionTool {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
-  @Nonnull
-  public String getGroupDisplayName() {
-    return ThriftBundle.message("inspections.group.name");
-  }
+@ExtensionImpl
+public class ThriftUnresolvedIncludeInspection extends LocalInspectionTool
+{
+	@Nullable
+	@Override
+	public Language getLanguage()
+	{
+		return ThriftLanguage.INSTANCE;
+	}
 
-  @Nls
-  @Nonnull
-  @Override
-  public String getDisplayName() {
-    return ThriftBundle.message("thrift.inspection.unresolved.include");
-  }
+	@Nonnull
+	public String getGroupDisplayName()
+	{
+		return ThriftBundle.message("inspections.group.name");
+	}
 
-  @Override
-  public boolean isEnabledByDefault() {
-    return true;
-  }
+	@Nls
+	@Nonnull
+	@Override
+	public String getDisplayName()
+	{
+		return ThriftBundle.message("thrift.inspection.unresolved.include");
+	}
 
-  @Nonnull
-  @Override
-  public String getShortName() {
-    return "ThriftUnresolvedInclude";
-  }
+	@Override
+	public boolean isEnabledByDefault()
+	{
+		return true;
+	}
 
-  @Nullable
-  @Override
-  public ProblemDescriptor[] checkFile(@Nonnull PsiFile file, @Nonnull final InspectionManager manager, final boolean isOnTheFly) {
-    final List<ProblemDescriptor> result = new ArrayList<ProblemDescriptor>();
-    new ThriftVisitor() {
+	@Nonnull
+	@Override
+	public String getShortName()
+	{
+		return "ThriftUnresolvedInclude";
+	}
 
-      @Override
-      public void visitInclude(@Nonnull ThriftInclude include) {
-        if (ThriftPsiUtil.resolveInclude(include) == null) {
-          PsiElement lastChild = include.getLastChild();
-          result.add(manager.createProblemDescriptor(
-            lastChild,
-            TextRange.from(0, lastChild.getTextLength()),
-            getDisplayName(),
-            ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
-            isOnTheFly
-          ));
-        }
-      }
+	@Nonnull
+	@Override
+	public HighlightDisplayLevel getDefaultLevel()
+	{
+		return HighlightDisplayLevel.ERROR;
+	}
 
-      public void visitElement(PsiElement element) {
-        super.visitElement(element);
-        element.acceptChildren(this);
-      }
-    }.visitFile(file);
-    return ArrayUtil.toObjectArray(result, ProblemDescriptor.class);
-  }
+	@Nullable
+	@Override
+	public ProblemDescriptor[] checkFile(@Nonnull PsiFile file, @Nonnull final InspectionManager manager, final boolean isOnTheFly)
+	{
+		final List<ProblemDescriptor> result = new ArrayList<ProblemDescriptor>();
+		new ThriftVisitor()
+		{
+
+			@Override
+			public void visitInclude(@Nonnull ThriftInclude include)
+			{
+				if(ThriftPsiUtil.resolveInclude(include) == null)
+				{
+					PsiElement lastChild = include.getLastChild();
+					result.add(manager.createProblemDescriptor(
+							lastChild,
+							TextRange.from(0, lastChild.getTextLength()),
+							getDisplayName(),
+							ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
+							isOnTheFly
+					));
+				}
+			}
+
+			public void visitElement(PsiElement element)
+			{
+				super.visitElement(element);
+				element.acceptChildren(this);
+			}
+		}.visitFile(file);
+		return ArrayUtil.toObjectArray(result, ProblemDescriptor.class);
+	}
 }

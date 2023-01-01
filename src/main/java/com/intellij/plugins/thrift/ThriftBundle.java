@@ -1,8 +1,7 @@
 package com.intellij.plugins.thrift;
 
-
+import consulo.component.util.localize.AbstractBundle;
 import org.jetbrains.annotations.PropertyKey;
-import com.intellij.AbstractBundle;
 
 /**
  * Created by fkorotkov.
