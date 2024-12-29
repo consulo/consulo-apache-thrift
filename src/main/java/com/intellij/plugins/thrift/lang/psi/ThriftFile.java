@@ -21,7 +21,7 @@ import consulo.language.file.FileViewProvider;
 import consulo.language.impl.psi.PsiFileBase;
 import consulo.virtualFileSystem.fileType.FileType;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 public class ThriftFile extends PsiFileBase {
   public ThriftFile(@Nonnull FileViewProvider viewProvider) {

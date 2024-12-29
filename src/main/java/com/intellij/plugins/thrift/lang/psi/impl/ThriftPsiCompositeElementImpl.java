@@ -20,7 +20,7 @@ import consulo.language.ast.ASTNode;
 import consulo.language.ast.IElementType;
 import consulo.language.impl.psi.ASTWrapperPsiElement;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 public class ThriftPsiCompositeElementImpl extends ASTWrapperPsiElement implements ThriftPsiCompositeElement {
   public ThriftPsiCompositeElementImpl(@Nonnull ASTNode node) {

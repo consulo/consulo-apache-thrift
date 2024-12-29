@@ -7,7 +7,7 @@ import consulo.language.editor.action.TypedHandlerDelegate;
 import consulo.language.psi.PsiFile;
 import consulo.project.Project;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by fkorotkov.

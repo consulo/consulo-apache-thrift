@@ -9,7 +9,7 @@ import com.intellij.usages.UsageTarget;
 import com.intellij.usages.UsageTargetUtil;
 import consulo.util.dataholder.Key;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.Collection;
 
 public abstract class ThriftFindUsagesTest extends ThriftCodeInsightFixtureTestCase {

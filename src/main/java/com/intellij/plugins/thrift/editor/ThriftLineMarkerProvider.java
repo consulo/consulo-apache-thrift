@@ -17,8 +17,8 @@ import consulo.language.editor.ui.PsiElementListNavigator;
 import consulo.language.psi.NavigatablePsiElement;
 import consulo.language.psi.PsiElement;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.function.Function;
