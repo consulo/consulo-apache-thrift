@@ -1,10 +1,14 @@
-thrift.name:
-  text: Thrift
-thrift.description:
-  text: Thrift interface definition
-thrift.inspection.unresolved.symbol:
-  text: Unresolved symbol
-thrift.inspection.unresolved.include:
-  text: Unresolved include
 inspections.group.name:
-  text: Thrift
+    text: Thrift
+thrift.description:
+    text: Thrift interface definition
+thrift.file.type..display.name:
+    text: Apache Thrift
+thrift.inspection.unresolved.include:
+    text: Unresolved include
+thrift.inspection.unresolved.symbol:
+    text: Unresolved symbol
+thrift.language.display.name:
+    text: Apache Thrift
+thrift.name:
+    text: Thrift
