@@ -1,55 +1,49 @@
 package com.intellij.plugins.thrift.lang.psi.presentation;
 
 import com.intellij.plugins.thrift.lang.psi.ThriftDeclaration;
+import consulo.annotation.access.RequiredReadAction;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.component.util.Iconable;
 import consulo.language.icon.IconDescriptorUpdaters;
+import consulo.localize.LocalizeValue;
 import consulo.navigation.ItemPresentation;
 import consulo.navigation.ItemPresentationProvider;
 import consulo.ui.image.Image;
 
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
- * Created by fkorotkov.
+ * @author fkorotkov
  */
 @ExtensionImpl
-public class ThriftTopLevelDeclarationPresentationProvider implements ItemPresentationProvider<ThriftDeclaration>
-{
-	@Nonnull
-	@Override
-	public Class<ThriftDeclaration> getItemClass()
-	{
-		return ThriftDeclaration.class;
-	}
+public class ThriftTopLevelDeclarationPresentationProvider implements ItemPresentationProvider<ThriftDeclaration> {
+    @Nonnull
+    @Override
+    public Class<ThriftDeclaration> getItemClass() {
+        return ThriftDeclaration.class;
+    }
 
-	@Nonnull
-	@Override
-	public ItemPresentation getPresentation(final ThriftDeclaration item)
-	{
-		return new ItemPresentation()
-		{
-			@Nullable
-			@Override
-			public String getPresentableText()
-			{
-				return item.getName();
-			}
+    @Nonnull
+    @Override
+    public ItemPresentation getPresentation(ThriftDeclaration item) {
+        return new ItemPresentation() {
+            @Override
+            public LocalizeValue getPresentableText() {
+                return LocalizeValue.ofNullable(item.getName());
+            }
 
-			@Nullable
-			@Override
-			public String getLocationString()
-			{
-				return item.getContainingFile().getName();
-			}
+            @Override
+            @RequiredReadAction
+            public @Nullable String getLocationString() {
+                return item.getContainingFile().getName();
+            }
 
-			@Nullable
-			@Override
-			public Image getIcon()
-			{
-				return IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY);
-			}
-		};
-	}
+            @Override
+            @RequiredReadAction
+            public @Nullable Image getIcon() {
+                return IconDescriptorUpdaters.getIcon(item, Iconable.ICON_FLAG_VISIBILITY);
+            }
+        };
+    }
 }
